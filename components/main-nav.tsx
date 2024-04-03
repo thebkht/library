@@ -25,54 +25,21 @@ export function MainNav() {
                          href="/browse"
                          className={cn(
                               "transition-colors hover:text-foreground/80",
-                              pathname === "/docs" ? "text-foreground" : "text-foreground/60"
+                              pathname === "/browse" ? "text-foreground" : "text-foreground/60"
                          )}
                     >
                          Browse
                     </Link>
                     <Link
-                         href="/docs/components"
+                         href="/categories"
                          className={cn(
                               "transition-colors hover:text-foreground/80",
-                              pathname?.startsWith("/docs/components")
+                              pathname?.startsWith("/categories")
                                    ? "text-foreground"
                                    : "text-foreground/60"
                          )}
                     >
-                         Components
-                    </Link>
-                    <Link
-                         href="/themes"
-                         className={cn(
-                              "transition-colors hover:text-foreground/80",
-                              pathname?.startsWith("/themes")
-                                   ? "text-foreground"
-                                   : "text-foreground/60"
-                         )}
-                    >
-                         Themes
-                    </Link>
-                    <Link
-                         href="/examples"
-                         className={cn(
-                              "transition-colors hover:text-foreground/80",
-                              pathname?.startsWith("/examples")
-                                   ? "text-foreground"
-                                   : "text-foreground/60"
-                         )}
-                    >
-                         Examples
-                    </Link>
-                    <Link
-                         href="/blocks"
-                         className={cn(
-                              "transition-colors hover:text-foreground/80",
-                              pathname?.startsWith("/blocks")
-                                   ? "text-foreground"
-                                   : "text-foreground/60"
-                         )}
-                    >
-                         Blocks
+                         Categories
                     </Link>
                     <Link
                          href={siteConfig.links.github}
