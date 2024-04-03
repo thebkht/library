@@ -43,7 +43,6 @@ export default function IndexPage() {
           width={1200}
           height={630}
           alt="Hero image"
-          className="hidden dark:block"
         />
       </section>
     </div>
