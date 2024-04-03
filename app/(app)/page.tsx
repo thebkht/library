@@ -40,8 +40,8 @@ export default function IndexPage() {
       <section className="overflow-hidden rounded-lg border bg-background shadow-md md:shadow-xl">
         <Image
           src="https://bkhtdev.com/assets/img/share.png"
-          width={1280}
-          height={727}
+          width={1200}
+          height={630}
           alt="Hero image"
           className="hidden dark:block"
         />
