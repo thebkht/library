@@ -3,7 +3,7 @@ type IconProps = React.HTMLAttributes<SVGElement>
 export const Icons = {
      logo: (props: IconProps) => (
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" {...props}>
-               <path d="M58.97,11.03v37.12l-10.71,10.82H11.03V21.85l10.71-10.82h37.22M70,0H17.15L0,17.31v52.69h52.85l17.15-17.31V0h0Z" fill="#000" stroke-width="0" />
+               <path d="M58.97,11.03v37.12l-10.71,10.82H11.03V21.85l10.71-10.82h37.22M70,0H17.15L0,17.31v52.69h52.85l17.15-17.31V0h0Z" fill="currentColor" stroke-width="0" />
           </svg>
      ),
      twitter: (props: IconProps) => (
