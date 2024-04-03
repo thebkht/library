@@ -16,10 +16,11 @@ export default function IndexPage() {
   return (
     <div className="container relative">
       <PageHeader>
-        <PageHeaderHeading>Build your component library</PageHeaderHeading>
+        <PageHeaderHeading>
+          bkht/library
+        </PageHeaderHeading>
         <PageHeaderDescription>
-          Beautifully designed components that you can copy and paste into your
-          apps. Accessible. Customizable. Open Source.
+          A personal library of books, articles, and other resources that I&apos;ve found useful.
         </PageHeaderDescription>
         <PageActions>
           <Link href="/docs" className={cn(buttonVariants())}>
