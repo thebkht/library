@@ -17,13 +17,13 @@ export default function IndexPage() {
     <div className="container relative">
       <PageHeader>
         <PageHeaderHeading>
-          bkht/library
+          {siteConfig.name}
         </PageHeaderHeading>
         <PageHeaderDescription>
           A personal library of books, articles, and other resources that I&apos;ve found useful.
         </PageHeaderDescription>
         <PageActions>
-          <Link href="/docs" className={cn(buttonVariants())}>
+          <Link href="/browse" className={cn(buttonVariants())}>
             Get Started
           </Link>
           <Link

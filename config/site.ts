@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "bkht/library",
+  name: "bkht / library",
   url: "https://ui.bkhtdev.com",
   ogImage: "https://ui.bkhtdev.com/og.jpg",
   description:
