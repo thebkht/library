@@ -25,7 +25,7 @@ export function BookCardV1({ book, ...props }: { book: Book } & React.ComponentP
                          <Skeleton className="h-full w-full" />
                     </AspectRatio>
                     <CardHeader className="p-5">
-                         <CardDescription>{book.author}</CardDescription>
+                         <CardDescription className="line-clamp-1">{book.author}</CardDescription>
                          <CardTitle className="line-clamp-2 leading-snug">{book.title}</CardTitle>
                     </CardHeader>
                </CardContent>
