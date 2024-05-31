@@ -11,9 +11,26 @@ import { buttonVariants } from "@/components/ui/button"
 
 export function SiteHeader() {
      return (
-          <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-               <div className="container flex h-14 max-w-screen-2xl items-center">
-                    <MainNav />
+          <header className="flex-none h-auto left-1/2 fixed top-0 -translate-x-1/2 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+               <div className="flex h-14 w-full justify-center relative items-center border-b border-dashed">
+                    <div className="flex items-center justify-center flex-[1_0_0] gap-2.5 h-full max-w-[1488px] w-[1px] relative">
+                         <div className="flex items-center justify-center flex-[1_0_0] h-full max-w-[1440px] relative w-[1px] pl-6">
+                              <Link className="flex flex-none items-center justify-center relative h-min w-min" href="/">
+                                   <div className="flex-none h-auto w-auto relative">
+                                        <div className="flex justify-center items-center gap-2 relative w-max h-min">
+                                             <Icons.logo className="h-6 w-6" />
+                                             <p className="text-xl font-bold">
+                                                  {siteConfig.name}
+                                             </p>
+                                        </div>
+                                   </div>
+                              </Link>
+                              <div className="flex items-center justify-end flex-[1_0_0] gap-2.5 h-full">
+                                   <ModeToggle />
+                              </div>
+                         </div>
+                    </div>
+                    {/* <MainNav />
                     <MobileNav />
                     <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
                          <div className="w-full flex-1 md:w-auto md:flex-none">
@@ -56,7 +73,7 @@ export function SiteHeader() {
                               </Link>
                               <ModeToggle />
                          </nav>
-                    </div>
+                    </div> */}
                </div>
           </header>
      )
