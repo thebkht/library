@@ -172,4 +172,16 @@ Organized around concepts and use cases, this comprehensive and complete referen
     purchuaseDate: "2023-06-17T12:00:00.000Z",
     type: "ebook",
   },
+  {
+    id: "16",
+    title: "C# 12 in a Nutshell: The Definitive Reference",
+    author: "Joseph Albahari",
+    description: `When you have questions about C# 12 or .NET 8, this best-selling guide has the answers you need. C# is a language of unusual flexibility and breadth, and with its continual growth, there's always so much more to learn. In the tradition of O'Reilly's Nutshell guides, this thoroughly updated edition is simply the best one-volume reference to the C# language available today.
+
+Aimed at intermediate and advanced programmers, this is a book whose explanations get straight to the point, covering C#, the CLR, and the core .NET libraries in depth without long intros or bloated samples.`,
+    cover: "/books/Csharp 12 in a Nutshell.jpg",
+    publishedDate: "2023-12-19T12:00:00.000Z",
+    purchuaseDate: "2023-06-17T12:00:00.000Z",
+    type: "ebook",
+  },
 ];
