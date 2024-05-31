@@ -1,6 +1,7 @@
 import { siteConfig } from "@/config/site"
 import Link from "next/link"
 import { Icons } from "./icons"
+import { ModeToggle } from "./mode-toggle"
 
 export function SiteFooter() {
      return (
@@ -17,6 +18,9 @@ export function SiteFooter() {
                               <Link target="_blank" href="https://twitter.com/thebkht" className="flex items-center text-muted-foreground hover:text-foreground">
                                    x (twitter)
                               </Link>
+                         </div>
+                         <div className="-mr-6">
+                              <ModeToggle />
                          </div>
                     </div>
                     {/* <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">

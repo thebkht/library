@@ -26,7 +26,7 @@ export function SiteHeader() {
                                    </div>
                               </Link>
                               <div className="flex items-center justify-end flex-[1_0_0] gap-2.5 h-full">
-                                   <ModeToggle />
+
                               </div>
                          </div>
                     </div>
