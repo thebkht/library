@@ -105,4 +105,14 @@ This 10th edition contains new information that highlight various technological 
     purchuaseDate: "2023-04-21T12:00:00.000Z",
     type: "hardcover",
   },
+  {
+    id: "10",
+    title: "Advanced Engineering Mathematics international student version",
+    author: "Erwin Kreyszig",
+    cover: "/books/Advanced Engineering Mathematics.jpg",
+    description: `Advanced Engineering Mathematics, 10th Edition is known for its comprehensive coverage, careful and correct mathematics, outstanding exercises, and self-contained subject matter parts for maximum flexibility. The new edition continues with the tradition of providing instructors and students with a comprehensive and up-to-date resource for teaching and learning engineering mathematics, that is, applied mathematics for engineers and physicists, mathematicians and computer scientists, as well as members of other disciplines.`,
+    publishedDate: "2012-08-01T12:00:00.000Z",
+    purchuaseDate: "2023-04-18T12:00:00.000Z",
+    type: "paperback",
+  },
 ];
