@@ -10,7 +10,7 @@ export function BookCardV1({ book, ...props }: { book: Book } & React.ComponentP
      return (<>
           <Card {...props}>
                <CardContent className="p-0">
-                    <AspectRatio ratio={4 / 5} style={{ position: "relative" }}>
+                    <AspectRatio ratio={2 / 3} style={{ position: "relative" }}>
                          {
                               book.cover !== "" ? (
                                    <Image
