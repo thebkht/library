@@ -59,4 +59,15 @@ Elucidating complex ideas with engaging prose and storytelling, Reopening Muslim
     purchuaseDate: "2024-04-04T12:00:00.000Z",
     type: "hardcover",
   },
+  {
+    id: "6",
+    title: "Digital Design Global Edition",
+    author: "M. Morris Mano",
+    cover: "/books/Digital Design Global Edition.jpg",
+    description: `For introductory courses on digital design in an Electrical Engineering, Computer Engineering, or Computer Science department.A clear and accessible approach to the basic tools, concepts, and applications of digital designA modern update to a classic, authoritative text, Digital Design, 6th Edition teaches the fundamental concepts of digital design in a clear, accessible manner. The text presents the basic tools for the design of digital circuits and provides procedures suitable for a variety of digital applications. Like the previous editions, this edition of Digital Design supports a multimodal approach to learning, with a focus on digital design, regardless of language. Recognizing that three public-domain languages--Verilog, VHDL, and SystemVerilog--all play a role in design flows for today
+`,
+    publishedDate: "2018-01-01T12:00:00.000Z",
+    purchuaseDate: "2024-02-19T12:00:00.000Z",
+    type: "paperback",
+  },
 ];
