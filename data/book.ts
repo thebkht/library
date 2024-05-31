@@ -31,4 +31,18 @@ export const books: Book[] = [
     purchuaseDate: "2024-02-04T12:00:00.000Z",
     type: "paperback",
   },
+  {
+    id: "4",
+    title: "Dune (Dune Chronicles, Book 1)",
+    author: "Frank Herbert",
+    cover: "/books/Dune Book 1.jpg",
+    description: `Frank Herbert’s classic masterpiece—a triumph of the imagination and one of the bestselling science fiction novels of all time.
+
+Set on the desert planet Arrakis, Dune is the story of Paul Atreides—who would become known as Muad'Dib—and of a great family's ambition to bring to fruition humankind's most ancient and unattainable dream.
+
+A stunning blend of adventure and mysticism, environmentalism and politics, Dune won the first Nebula Award, shared the Hugo Award, and formed the basis of what is undoubtedly the grandest epic in science fiction.`,
+    publishedDate: "2005-08-02T12:00:00.000Z",
+    purchuaseDate: "2024-03-21T12:00:00.000Z",
+    type: "paperback",
+  },
 ];
