@@ -21,4 +21,14 @@ export const books: Book[] = [
     purchuaseDate: "2024-02-04T12:00:00.000Z",
     type: "paperback",
   },
+  {
+    id: "3",
+    title: "Animal Farm",
+    author: "George Orwell",
+    cover: "/books/Animal Farm 75th Anniversary.jpg",
+    description: `The description of Animal Farm Book: Overworked and mistreated animals one day gather and take over the farm where they live. They finally have a say, determined to create a more just and equal society on the farm. They begin to work to establish this new order under the leadership of the pigs. Although this order helped the farm to develop at first, problems that the animals could not foresee will arise over time and a more brutal regime will be established than before. Animal Farm is George Orwell's second well-known modern classic novel and a striking political satire. One of the best critiques of the system ever written, this novel reveals how a liberation revolution can evolve into one-manhood. George Orwell's allegory remains relevant today in every situation and place where freedom is attacked.`,
+    publishedDate: "1922-01-01T12:00:00.000Z",
+    purchuaseDate: "2024-02-04T12:00:00.000Z",
+    type: "paperback",
+  },
 ];
