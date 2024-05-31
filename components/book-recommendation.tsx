@@ -14,7 +14,7 @@ export function BookRecommendation() {
           <div className="w-full mt-5">
                <Carousel opts={{
                     align: "start",
-               }} className="xl:max-w-6xl lg:max-w-3xl md:max-w-xl w-full mx-auto">
+               }} className="xl:max-w-7xl lg:max-w-4xl md:max-w-xl w-full mx-auto">
 
                     <CarouselContent className="lg:-ml-5 -ml-2 flex">
                          {
