@@ -80,4 +80,19 @@ Elucidating complex ideas with engaging prose and storytelling, Reopening Muslim
     purchuaseDate: "2024-04-10T12:00:00.000Z",
     type: "paperback",
   },
+  {
+    id: "8",
+    title: "Software Engineering Global Edition 10th ed. Edition",
+    author: "Ian Sommerville",
+    cover: "/books/Software Engineering Global Edition Cover.jpg",
+    description: `Understand the fundamental practices of modern software engineering.
+Software Engineering, 10th Edition, Global Edition, by Ian Sommerville, provides you with a solid introduction to the crucial subject of software programming and development. As computer systems have come to dominate our technical growth in recent years, they have also come to permeate the foundations of the world's major industries. This text lays out the fundamental concepts of this vast, constantly growing subject area in a clear and comprehensive manner.
+
+The book aims to teach you, the innovators of tomorrow, how to create software that will make our world a better, safer, and more advanced place to live. Sommerville's experience in system dependability and systems engineering guides you through the text using a traditional, plan-based approach that also incorporates novel agile methods.
+
+This 10th edition contains new information that highlight various technological updates in recent years, providing you with highly relevant and current information. With new case studies and updated chapters on topics like service-oriented software, this edition ensures your studies keep pace with today's business world.`,
+    publishedDate: "2015-08-20T12:00:00.000Z",
+    purchuaseDate: "2023-10-10T12:00:00.000Z",
+    type: "paperback",
+  },
 ];
