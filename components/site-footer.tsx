@@ -12,7 +12,7 @@ export function SiteFooter() {
                                    portfolio
                               </Link>
                               <Link target="_blank" href="https://github.com/thebkht" className="flex items-center text-muted-foreground hover:text-foreground">
-                                   gitHub
+                                   github
                               </Link>
                               <Link target="_blank" href="https://twitter.com/thebkht" className="flex items-center text-muted-foreground hover:text-foreground">
                                    x (twitter)
