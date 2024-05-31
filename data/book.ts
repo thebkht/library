@@ -62,12 +62,22 @@ Elucidating complex ideas with engaging prose and storytelling, Reopening Muslim
   {
     id: "6",
     title: "Digital Design Global Edition",
-    author: "M. Morris Mano",
+    author: "M. Morris Mano, Michael D. Ciletti",
     cover: "/books/Digital Design Global Edition.jpg",
     description: `For introductory courses on digital design in an Electrical Engineering, Computer Engineering, or Computer Science department.A clear and accessible approach to the basic tools, concepts, and applications of digital designA modern update to a classic, authoritative text, Digital Design, 6th Edition teaches the fundamental concepts of digital design in a clear, accessible manner. The text presents the basic tools for the design of digital circuits and provides procedures suitable for a variety of digital applications. Like the previous editions, this edition of Digital Design supports a multimodal approach to learning, with a focus on digital design, regardless of language. Recognizing that three public-domain languages--Verilog, VHDL, and SystemVerilog--all play a role in design flows for today
 `,
     publishedDate: "2018-01-01T12:00:00.000Z",
     purchuaseDate: "2024-02-19T12:00:00.000Z",
+    type: "paperback",
+  },
+  {
+    id: "7",
+    title: "Operating System Concepts 10th Edition",
+    author: "Abraham Silberschatz, Greg Gagne, Peter B. Galvin",
+    cover: "/books/Operating System Concepts book.jpg",
+    description: `The tenth edition of Operating System Concepts has been revised to keep it fresh and up-to-date with contemporary examples of how operating systems function, as well as enhanced interactive elements to improve learning and the student's experience with the material. It combines instruction on concepts with real-world applications so that students can understand the practical usage of the content. End-of-chapter problems, exercises, review questions, and programming exercises help to further reinforce important concepts. New interactive self-assessment problems are provided throughout the text to help students monitor their level of understanding and progress. A Linux virtual machine (including C and Java source code and development tools) allows students to complete programming exercises that help them engage further with the material.`,
+    publishedDate: "2021-02-09T12:00:00.000Z",
+    purchuaseDate: "2024-04-10T12:00:00.000Z",
     type: "paperback",
   },
 ];
