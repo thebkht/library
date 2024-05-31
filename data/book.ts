@@ -16,18 +16,8 @@ export const books: Book[] = [
     title: "1984",
     author: "George Orwell",
     cover: "/books/1984 75th Anniversary.jpg",
-    description: `Written 75 years ago, 1984 was George Orwell’s chilling prophecy about the future. And while 1984 has come and gone, his dystopian vision of a government that will do anything to control the narrative is timelier than ever...
-
-This 75th Anniversary Edition includes:
-• A New Introduction by Dolen Perkins-Valdez, author of Take My Hand, winner of the 2023 NAACP Image Award for Outstanding Literary Work—Fiction
-• A New Afterword by Sandra Newman, author of Julia: A Retelling of George Orwell’s 1984
-
-“The Party told you to reject the evidence of your eyes and ears. It was their final, most essential command.”
-
-Winston Smith toes the Party line, rewriting history to satisfy the demands of the Ministry of Truth. With each lie he writes, Winston grows to hate the Party that seeks power for its own sake and persecutes those who dare to commit thoughtcrimes. But as he starts to think for himself, Winston can’t escape the fact that Big Brother is always watching...
-
-A startling and haunting novel, 1984 creates an imaginary world that is completely convincing from start to finish. No one can deny the novel’s hold on the imaginations of whole generations, or the power of its admonitions—a power that seems to grow, not lessen, with the passage of time.`,
-    publishedDate: "1961-01-01T12:00:00.000Z",
+    description: `Newspeak, Doublethink, Big Brother, the Thought Police - the language of 1984 has passed into the English language as a symbol of the horrors of totalitarianism. George Orwell's story of Winston Smith's fight against the all-pervading Party has become a classic, not the least because of its intellectual coherence. First published in 1949, it retains as much relevance today as it had then.`,
+    publishedDate: "1949-01-01T12:00:00.000Z",
     purchuaseDate: "2024-02-04T12:00:00.000Z",
     type: "paperback",
   },
