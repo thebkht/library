@@ -11,7 +11,7 @@ import { buttonVariants } from "@/components/ui/button"
 
 export function SiteHeader() {
      return (
-          <header className="flex-none h-auto left-1/2 fixed top-0 -translate-x-1/2 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <header className="flex-none h-auto left-1/2 fixed top-0 -translate-x-1/2 z-50 w-full bg-background">
                <div className="flex h-14 w-full justify-center relative items-center border-b border-dashed">
                     <div className="flex items-center justify-center flex-[1_0_0] gap-2.5 h-full max-w-[1488px] w-[1px] relative">
                          <div className="flex items-center justify-center flex-[1_0_0] h-full max-w-[1440px] relative w-[1px] pl-6">
