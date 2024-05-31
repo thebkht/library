@@ -150,4 +150,14 @@ The first edition became a widely used text in universities worldwide as well as
     purchuaseDate: "2024-01-05T12:00:00.000Z",
     type: "ebook",
   },
+  {
+    id: "14",
+    title: "Problem Solving with C++, Global Edition",
+    author: "Walter Savitch",
+    description: `For courses in C++ introductory programming. Teach the fundamentals of C++ programming with an emphasis on problem solvingNow in its 10th Edition, Problem Solving with C++ is written for the beginning programmer. The text cultivates strong problem-solving skills and programming techniques as it introduces students to the C++ programming language. Author Walt Savitch’s approach to programming emphasizes active reading through the use of well-placed examples and self-tests, while flexible coverage means instructors can easily adapt the order of chapters and sections to their courses without sacrificing continuity. Savitch’s clear, concise style is a hallmark feature of the text, receiving praise from students and instructors alike, and is supported by a suite of tried-and-true pedagogical tools. The 10th Edition includes ten new Programming Projects, along with new discussions and revisions. Pearson Pearson MyLab Programming not included. Students, if MyLab is a recommended/mandatory component of the course, please ask your instructor for the correct ISBN and course ID. MyLab should only be purchased when required by an instructor. Instructors, contact your Pearson rep for more information.Pearson MyLab Programming is an online learning system designed to engage students and improve results. Pearson MyLab Programming consists of programming exercises correlated to the concepts and objectives in this book. Through practice exercises and immediate, personalized feedback, Pearson MyLab Programming improves the programming competence of beginning students who often struggle with the basic concepts of programming languages.`,
+    cover: "/books/Problem Solving with C++ book.jpg",
+    publishedDate: "2016-01-01T12:00:00.000Z",
+    purchuaseDate: "2023-06-17T12:00:00.000Z",
+    type: "ebook",
+  },
 ];
