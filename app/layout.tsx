@@ -17,13 +17,6 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
-  keywords: [
-    "Next.js",
-    "React",
-    "Tailwind CSS",
-    "Server Components",
-    "Radix UI",
-  ],
   authors: [
     {
       name: "bkhtdev",
@@ -91,6 +84,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             disableTransitionOnChange
           >
             <div vaul-drawer-wrapper="">
+              <div className="flex-none h-screen pointer-events-none fixed top-0 w-full z-[200]">
+                <div className="noise" />
+              </div>
               <div className="relative flex min-h-screen flex-col bg-background">
                 {children}
               </div>
