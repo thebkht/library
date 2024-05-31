@@ -28,7 +28,7 @@ Winston Smith toes the Party line, rewriting history to satisfy the demands of t
 
 A startling and haunting novel, 1984 creates an imaginary world that is completely convincing from start to finish. No one can deny the novel’s hold on the imaginations of whole generations, or the power of its admonitions—a power that seems to grow, not lessen, with the passage of time.`,
     publishedDate: "1961-01-01T12:00:00.000Z",
-    purchuaseDate: "",
+    purchuaseDate: "2024-02-04T12:00:00.000Z",
     type: "paperback",
   },
 ];
