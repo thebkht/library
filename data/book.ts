@@ -126,4 +126,28 @@ This 10th edition contains new information that highlight various technological 
     purchuaseDate: "2022-04-23T12:00:00.000Z",
     type: "paperback",
   },
+  //   {
+  //     id: "12",
+  //     title: "On the Treatment of the Lust of the Stomach and the Sexual Organs",
+  //     author: "Imam Al-Ghazali",
+  //     cover: "/books/Lust of the Stomach.jpg",
+  //     description: `Al-Ghazzali discusses the obstacles on the path of faith by offering methods of treatment of the lust of the stomach and the sexual organs as well as the inner mystery of the greater struggle, the harm of checking lust and describing the harms of the lust of the sexual organs. This is Book XXII of Part Three of the Alchemy of Happiness entitled The Destroyers.`,
+  //     publishedDate: "2012-01-30T12:00:00.000Z",
+  //     purchuaseDate: "2024-05-27T12:00:00.000Z",
+  //     type: "ebook",
+  //   },
+  {
+    id: "13",
+    title: "Introduction to Algorithms 3rd Edition",
+    author:
+      "Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein",
+    cover: "/books/Introduction to Algorithms 3rd Edition.jpg",
+    description: `The latest edition of the essential text and professional reference, with substantial new material on such topics as vEB trees, multithreaded algorithms, dynamic programming, and edge-based flow.
+Some books on algorithms are rigorous but incomplete; others cover masses of material but lack rigor. Introduction to Algorithms uniquely combines rigor and comprehensiveness. The book covers a broad range of algorithms in depth, yet makes their design and analysis accessible to all levels of readers. Each chapter is relatively self-contained and can be used as a unit of study. The algorithms are described in English and in a pseudocode designed to be readable by anyone who has done a little programming. The explanations have been kept elementary without sacrificing depth of coverage or mathematical rigor.
+
+The first edition became a widely used text in universities worldwide as well as the standard reference for professionals. The second edition featured new chapters on the role of algorithms, probabilistic analysis and randomized algorithms, and linear programming. The third edition has been revised and updated throughout. It includes two completely new chapters, on van Emde Boas trees and multithreaded algorithms, substantial additions to the chapter on recurrence (now called "Divide-and-Conquer"), and an appendix on matrices. It features improved treatment of dynamic programming and greedy algorithms and a new notion of edge-based flow in the material on flow networks. Many exercises and problems have been added for this edition. The international paperback edition is no longer available; the hardcover is available worldwide.`,
+    publishedDate: "2009-07-31T12:00:00.000Z",
+    purchuaseDate: "2024-01-05T12:00:00.000Z",
+    type: "ebook",
+  },
 ];
