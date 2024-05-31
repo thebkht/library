@@ -45,4 +45,18 @@ A stunning blend of adventure and mysticism, environmentalism and politics, Dune
     purchuaseDate: "2024-03-21T12:00:00.000Z",
     type: "paperback",
   },
+  {
+    id: "5",
+    title: "Reopening Muslim Minds",
+    author: "Mustafa Akyol",
+    cover: "/books/Reopening Muslim Minds.jpg",
+    description: `A fascinating journey into Islam's diverse history of ideas, making an argument for an "Islamic Enlightenment" today
+
+In Reopening Muslim Minds, Mustafa Akyol, senior fellow at the Cato Institute and opinion writer for The New York Times, both diagnoses “the crisis of Islam” in the modern world, and offers a way forward. Diving deeply into Islamic theology, and also sharing lessons from his own life story, he reveals how Muslims lost the universalism that made them a great civilization in their earlier centuries. He especially demonstrates how values often associated with Western Enlightenment ― freedom, reason, tolerance, and an appreciation of science ― had Islamic counterparts, which sadly were cast aside in favor of more dogmatic views, often for political ends.
+
+Elucidating complex ideas with engaging prose and storytelling, Reopening Muslim Minds borrows lost visions from medieval Muslim thinkers such as Ibn Rushd (aka Averroes), to offer a new Muslim worldview on a range of sensitive issues: human rights, equality for women, freedom of religion, or freedom from religion. While frankly acknowledging the problems in the world of Islam today, Akyol offers a clear and hopeful vision for its future.`,
+    publishedDate: "2022-04-05T12:00:00.000Z",
+    purchuaseDate: "2024-04-04T12:00:00.000Z",
+    type: "hardcover",
+  },
 ];
