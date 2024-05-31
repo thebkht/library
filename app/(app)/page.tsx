@@ -11,6 +11,7 @@ import {
   PageHeaderHeading,
 } from "@/components/page-header"
 import { buttonVariants } from "@/components/ui/button"
+import { BookRecommendation } from "@/components/book-recommendation"
 
 export default function IndexPage() {
   return (
@@ -37,14 +38,10 @@ export default function IndexPage() {
           </Link>
         </PageActions>
       </PageHeader>
-      <section className="overflow-hidden rounded-lg border bg-background shadow-md md:shadow-xl">
-        <Image
-          src="https://bkhtdev.com/assets/img/share.png"
-          width={1200}
-          height={630}
-          alt="Hero image"
-        />
-      </section>
+      <div className="container relative px-5 flex-1 flex flex-col">
+        <div className="flex justify-center"></div>
+        <BookRecommendation />
+      </div>
     </div>
   )
 }
