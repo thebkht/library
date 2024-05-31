@@ -95,4 +95,14 @@ This 10th edition contains new information that highlight various technological 
     purchuaseDate: "2023-10-10T12:00:00.000Z",
     type: "paperback",
   },
+  {
+    id: "9",
+    title: "C++ Plus Data Structures 6th Edition",
+    author: "Nell Dale, Chip Weems, Tim Richards",
+    cover: "/books/C++ Plus Data Structures book.jpg",
+    description: `C++ Plus Data Structures, Sixth Edition explores the specifications, applications, and implementations of abstract data types with unmatched accessibility. Topics such as modularization, data encapsulation, information hiding, object-oriented decomposition, algorithm analysis, life-cycle software verification models, and data abstraction are carefully presented to foster solid software engineering techniques. NEW & KEY FEATURES OF THE SIXTH EDITION: • UPDATED – Updated with new C++11 features including range-based for loops and threads • NEW – Includes a new Chapter 10, Trees Plus, that emphasizes balancing of search trees by covering AVL Trees, Red-Black Trees, and B-Trees • NEW – Includes a new chapter on Sets, Maps, and Hashing • NEW – Chapter 12, Sorting, now includes practical performance issues and parallel merge sort • NEW – Chapters in the second half of the text are now easier to assign in alternate orders, supporting a wider range of course goals and organizations • NEW – Modern new design enhances the look and feel of the text • STUDENT FAVORITE – Pedagogical features include: chapter openers with goals, marginal definition boxes, algorithm boxes, C++ boxes, function boxes, case studies, chapter summary, and end of chapter exercises`,
+    publishedDate: "2016-09-09T12:00:00.000Z",
+    purchuaseDate: "2023-04-21T12:00:00.000Z",
+    type: "hardcover",
+  },
 ];
