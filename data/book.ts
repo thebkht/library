@@ -160,4 +160,16 @@ The first edition became a widely used text in universities worldwide as well as
     purchuaseDate: "2023-06-17T12:00:00.000Z",
     type: "ebook",
   },
+  {
+    id: "15",
+    title: "C# 10 in a Nutshell: The Definitive Reference",
+    author: "Joseph Albahari",
+    description: `When you have questions about C# 10 or .NET 6, this best-selling guide has the answers you need. C# is a language of unusual flexibility and breadth, and with its continual growth, there's always so much more to learn. In the tradition of O'Reilly's Nutshell guides, this thoroughly updated edition is simply the best one-volume reference to the C# language available today.
+
+Organized around concepts and use cases, this comprehensive and complete reference provides intermediate and advanced programmers with a concise map of C# and .NET that also plumbs significant depths.`,
+    cover: "/books/Csharp 10 in a Nutshell.jpg",
+    publishedDate: "2022-03-15T12:00:00.000Z",
+    purchuaseDate: "2023-06-17T12:00:00.000Z",
+    type: "ebook",
+  },
 ];
