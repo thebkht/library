@@ -51,7 +51,7 @@ export default function IndexPage() {
             </Link>
           </div>
         </div>
-        <div className="flex flex-nowrap items-center md:flex-[0.7_0_0px] flex-row gap-0 md:h-[calc(100vh-3.5rem)] justify-center md:sticky top-0 z-10 will-change-transform md:w-4 w-full -mx-8">
+        <div className="flex flex-nowrap items-center md:flex-[0.7_0_0px] flex-row gap-3 md:h-[calc(100vh-3.5rem)] justify-center md:sticky top-0 z-10 will-change-transform md:w-4 w-full md:m-0 -mx-8">
           <BookCarouselMobile books={books} />
           <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 overflow-hidden w-4 h-full pt-14">
             <div className="flex-[1_0_0px] w-full h-4 relative">

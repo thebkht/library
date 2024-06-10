@@ -43,7 +43,7 @@ export function BookCarousel({ books, ...props }: { books: Book[] } & React.Comp
                                         key={book.id}
                                         className="flex h-full w-full max-h-full max-w-full items-center justify-center gap-3 will-change-transform flex-col"
                                    >
-                                        <BookCardV1 book={book} className="w-[85%]" />
+                                        <BookCardV1 book={book} className="w-full" />
                                    </CarouselItem>
                               ))}
                          </CarouselContent>
