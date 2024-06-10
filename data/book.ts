@@ -35,6 +35,59 @@ export const books: Book[] = [
     slug: "animal-farm",
   },
   {
+    id: "19",
+    title: "Fight Club: A Novel",
+    author: "Chuck Palahniuk",
+    cover: "/books/Fight Club Novel.jpg",
+    description: `The first rule about fight club is you don't talk about fight club.
+
+Chuck Palahniuk showed himself to be his generation’s most visionary satirist in this, his first book. Fight Club’s estranged narrator leaves his lackluster job when he comes under the thrall of Tyler Durden, an enigmatic young man who holds secret after-hours boxing matches in the basements of bars. There, two men fight "as long as they have to." This is a gloriously original work that exposes the darkness at the core of our modern world.`,
+    publishedDate: "2018-05-01T12:00:00.000Z",
+    purchuaseDate: "2024-06-14T12:00:00.000Z",
+    type: "paperback",
+    slug: "fight-club",
+  },
+  {
+    id: "20",
+    title: "Don't Believe Everything You Think",
+    author: "Joseph Nguyen",
+    cover: "/books/Fight Club Novel.jpg",
+    description: `Learn how to overcome anxiety, self-doubt & self-sabotage without needing to rely on motivation or willpower.
+
+In this book, you'll discover the root cause of all psychological and emotional suffering and how to achieve freedom of mind to effortlessly create the life you've always wanted to live.
+
+Although pain is inevitable, suffering is optional.
+
+This book offers a completely new paradigm and understanding of where our human experience comes from, allowing us to end our own suffering and create how we want to feel at any moment.
+
+In This Book, You’ll Discover:
+
+The root cause of all psychological and emotional suffering and how to end it
+How to become unaffected by negative thoughts and feelings
+How to experience unconditional love, peace, and joy in the present, no matter what our external circumstances look like
+How to instantly create a new experience of life if you don’t like the one you’re in right now
+How to break free from a negative thought loop when we inevitably get caught in one
+How to let go of anxiety, self-doubt, self-sabotage, and any self-destructive habits
+How to effortlessly create from a state of abundance, flow, and ease
+How to develop the superpower of being okay with not knowing and uncertainty
+How to access your intuition and inner wisdom that goes beyond the limitations of thinking
+No matter what has happened to you, where you are from, or what you have done, you can still find total peace, unconditional love, complete fulfillment, and an abundance of joy in your life.
+
+No person is an exception to this. Darkness only exists because of the light, which means even in our darkest hour, light must exist.
+
+Within the pages of this book, contains timeless wisdom to empower you with the understanding of our mind’s infinite potential to create any experience of life that we want no matter the external circumstances.
+
+‘Don’t Believe Everything You Think’ is not about rewiring your brain, rewriting your past, positive thinking or anything of the sort.
+
+We cannot solve our problems with the same level of consciousness that created them. Tactics are temporary. An expansion of consciousness is permanent.
+
+This book was written to help you go beyond your thinking and discover the truth of what you already intuitively know deep inside your soul.`,
+    publishedDate: "2022-03-28T12:00:00.000Z",
+    purchuaseDate: "2024-06-20T12:00:00.000Z",
+    type: "paperback",
+    slug: "dont-blieve-everything-you-think",
+  },
+  {
     id: "4",
     title: "Dune (Dune Chronicles, Book 1)",
     author: "Frank Herbert",
