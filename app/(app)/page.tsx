@@ -21,7 +21,7 @@ import { BookCarouselMobile } from "@/components/book-carousel-mobile"
 export default function IndexPage() {
   const first = books.slice(0, 3)
   const second = books.slice(3, 6)
-  const third = books.slice(6, 10)
+  const third = books.slice(6, 9)
 
   return (
     <div className="container relative mx-auto w-full sm:p-0">
@@ -30,7 +30,7 @@ export default function IndexPage() {
           <div className="flex flex-col items-start flex-none flex-nowrap gap-12 h-min justify-center p-0 w-full">
             <div className="flex flex-col items-start flex-none flex-nowrap gap-6 h-min justify-center p-0 w-full">
               <div className="flex justify-start transform-none outline-none flex-col shrink-0">
-                <h1 className="font-bold lg:text-7xl md:text-6xl text-3xl md:text-left text-center">
+                <h1 className="font-bold lg:text-6xl md:text-5xl text-3xl md:text-left text-center">
                   a personal library of books, articles, and other resources that I&apos;ve found useful.
                 </h1>
               </div>
@@ -51,7 +51,7 @@ export default function IndexPage() {
             </Link>
           </div>
         </div>
-        <div className="flex flex-nowrap items-center md:flex-[0.7_0_0px] flex-row gap-2 md:h-[calc(100vh-3.5rem)] justify-center md:sticky top-0 z-10 will-change-transform md:w-4 w-full -mx-8">
+        <div className="flex flex-nowrap items-center md:flex-[0.7_0_0px] flex-row gap-0 md:h-[calc(100vh-3.5rem)] justify-center md:sticky top-0 z-10 will-change-transform md:w-4 w-full -mx-8">
           <BookCarouselMobile books={books} />
           <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 overflow-hidden w-4 h-full pt-14">
             <div className="flex-[1_0_0px] w-full h-4 relative">
@@ -60,7 +60,7 @@ export default function IndexPage() {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 pt-14 overflow-hidden w-4 h-full">
+          <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 pt-6 overflow-hidden w-4 h-full">
             <div className="flex-[1_0_0px] w-full h-4 relative">
               <div className="contents">
                 <BookCarousel books={second} opts={{
