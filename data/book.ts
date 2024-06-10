@@ -51,7 +51,7 @@ Chuck Palahniuk showed himself to be his generation’s most visionary satirist 
     id: "20",
     title: "Don't Believe Everything You Think",
     author: "Joseph Nguyen",
-    cover: "/books/Fight Club Novel.jpg",
+    cover: "/books/Don't Believe Everything You Think book.jpg",
     description: `Learn how to overcome anxiety, self-doubt & self-sabotage without needing to rely on motivation or willpower.
 
 In this book, you'll discover the root cause of all psychological and emotional suffering and how to achieve freedom of mind to effortlessly create the life you've always wanted to live.
