@@ -23,7 +23,7 @@ export default function IndexPage() {
   return (
     <div className="container relative">
       <div className="flex items-start flex-none flex-row flex-nowrap h-auto justify-center w-full max-w-[1440px]">
-        <div className="flex flex-col items-start flex-[1_0_0px] flex-nowrap gap-16 h-screen justify-center p-6 w-4 pr-24">
+        <div className="flex flex-col items-start flex-[1_0_0px] flex-nowrap gap-16 h-[calc(100vh-3.5rem)] justify-center p-6 w-4 pr-24">
           <div className="flex flex-col items-start flex-none flex-nowrap gap-12 h-min justify-center p-0 w-full">
             <div className="flex flex-col items-start flex-none flex-nowrap gap-6 h-min justify-center p-0 w-full">
               <div className="flex justify-start transform-none outline-none flex-col shrink-0">
@@ -48,7 +48,7 @@ export default function IndexPage() {
             </Link>
           </div>
         </div>
-        <div className="flex flex-nowrap items-center flex-[0.7_0_0px] flex-row gap-2 h-screen justify-center sticky top-0 z-10 will-change-transform w-4">
+        <div className="flex flex-nowrap items-center flex-[0.7_0_0px] flex-row gap-2 h-[calc(100vh-3.5rem)] justify-center sticky top-0 z-10 will-change-transform w-4">
           <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 overflow-hidden w-4 h-full">
             <div className="flex-[1_0_0px] w-full h-4 relative">
               <div className="contents">
