@@ -65,6 +65,21 @@ And even as House Atreides begins to crumble around him from the machinations of
     slug: "dune-book2",
   },
   {
+    id: "18",
+    title: "The 48 Laws of Power",
+    author: "Robert Greene",
+    cover: "/books/48 Laws of Power book.jpg",
+    description: `Amoral, cunning, ruthless, and instructive, this multi-million-copy New York Times bestseller is the definitive manual for anyone interested in gaining, observing, or defending against ultimate control – from the author of The Laws of Human Nature.
+
+In the book that People magazine proclaimed “beguiling” and “fascinating,” Robert Greene and Joost Elffers have distilled three thousand years of the history of power into 48 essential laws by drawing from the philosophies of Machiavelli, Sun Tzu, and Carl Von Clausewitz and also from the lives of figures ranging from Henry Kissinger to P.T. Barnum.
+ 
+Some laws teach the need for prudence (“Law 1: Never Outshine the Master”), others teach the value of confidence (“Law 28: Enter Action with Boldness”), and many recommend absolute self-preservation (“Law 15: Crush Your Enemy Totally”). Every law, though, has one thing in common: an interest in total domination. In a bold and arresting two-color package, The 48 Laws of Power is ideal whether your aim is conquest, self-defense, or simply to understand the rules of the game.`,
+    publishedDate: "2000-09-01T12:00:00.000Z",
+    purchuaseDate: "2024-06-10T12:00:00.000Z",
+    type: "paperback",
+    slug: "48-laws-of-power",
+  },
+  {
     id: "5",
     title: "Reopening Muslim Minds",
     author: "Mustafa Akyol",
