@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Book } from "@/lib/types/book";
 import {
      Carousel,
@@ -12,15 +12,24 @@ import AutoScroll from "embla-carousel-auto-scroll";
 import { BookCardV1 } from "@/components/book-card-v1";
 
 export function BookCarousel({ books, ...props }: { books: Book[] } & React.ComponentPropsWithoutRef<typeof Carousel>) {
-     const plugin = React.useRef(
+     const autoScrollRef = React.useRef(
           AutoScroll({ playOnInit: true })
      )
+     useCallback(() => {
+          const autoScroll = autoScrollRef?.current
+          if (!autoScroll) return
+
+          const playOrStop = autoScroll.isPlaying()
+               ? autoScroll.stop
+               : autoScroll.play
+          playOrStop()
+     }, [autoScrollRef])
      return (
           <>
                <div className="flex h-full w-full max-h-full max-w-full items-center justify-center overflow-hidden">
                     <Carousel
                          orientation="vertical"
-                         plugins={[plugin.current]}
+                         plugins={[autoScrollRef.current]}
                          opts={{
                               align: "start",
                               dragFree: true,
