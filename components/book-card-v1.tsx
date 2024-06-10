@@ -10,20 +10,21 @@ export function BookCardV1({ book, ...props }: { book: Book } & React.ComponentP
      return (<>
           <Card {...props}>
                <CardContent className="p-0">
-                    <AspectRatio ratio={2 / 3} style={{ position: "relative" }}>
+                    <div className="w-full h-auto">
                          {
                               book.cover !== "" ? (
                                    <Image
                                         src={book.cover}
                                         alt={book.title}
-                                        layout="fill"
-                                        objectFit="cover"
+                                        layout="responsive"
+                                        width={1000}
+                                        height={500}
                                         objectPosition="center"
                                    />
                               ) : null
                          }
                          <Skeleton className="h-full w-full" />
-                    </AspectRatio>
+                    </div>
                     <CardHeader className="p-5">
                          <CardDescription className="line-clamp-1">{book.author}</CardDescription>
                          <CardTitle className="line-clamp-2 leading-snug">{book.title}</CardTitle>

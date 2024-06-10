@@ -36,11 +36,11 @@ export function BookCarouselMobile({ books, ...props }: { books: Book[] } & Reac
                          }}
                          {...props}
                     >
-                         <CarouselContent className="-ml-1">
+                         <CarouselContent className="-ml-8 -mr-8">
                               {books.map((book) => (
                                    <CarouselItem
                                         key={book.id}
-                                        className="pl-1 basis-1/3"
+                                        className="pl-4 basis-80"
                                    >
                                         <BookCardV1 book={book} className="w-full" />
                                    </CarouselItem>
