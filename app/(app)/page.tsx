@@ -17,8 +17,8 @@ import { BookCardV1 } from "@/components/book-card-v1"
 
 
 export default function IndexPage() {
-  const first = books.slice(0, books.length / 3)
-  const second = books.slice(books.length / 3, books.length / 3 * 2)
+  const first = books.slice(0, 6)
+  const second = books.slice(0, 3)
 
   return (
     <div className="container relative">
@@ -53,7 +53,7 @@ export default function IndexPage() {
             <div className="flex-[1_0_0px] w-full h-4 relative">
               <div className="contents">
                 <div className="flex h-full w-full max-h-full max-w-full items-center justify-center overflow-hidden">
-                  <ul className="flex h-full w-full max-h-full max-w-full items-center justify-center gap-2 will-change-transform flex-col">
+                  <ul className="flex h-full w-full max-h-full max-w-full items-center justify-center gap-6 will-change-transform flex-col">
                     {
                       first.map((book) => (
                         <li key={book.id} className="contents">
@@ -66,11 +66,11 @@ export default function IndexPage() {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 pt-14 overflow-hidden w-4 h-full">
+          <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 pt-0 overflow-hidden w-4 h-full">
             <div className="flex-[1_0_0px] w-full h-4 relative">
               <div className="contents">
                 <div className="flex h-full w-full max-h-full max-w-full items-center justify-center overflow-hidden">
-                  <ul className="flex h-full w-full max-h-full max-w-full items-center justify-center gap-2 will-change-transform flex-col">
+                  <ul className="flex h-full w-full max-h-full max-w-full items-center justify-center gap-6 will-change-transform flex-col">
                     {
                       second.map((book) => (
                         <li key={book.id} className="contents">
