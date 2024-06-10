@@ -11,7 +11,7 @@ import {
 import AutoScroll from "embla-carousel-auto-scroll";
 import { BookCardV1 } from "@/components/book-card-v1";
 
-export function BookCarousel({ books, ...props }: { books: Book[] } & React.ComponentPropsWithoutRef<typeof Carousel>) {
+export function BookCarouselMobile({ books, ...props }: { books: Book[] } & React.ComponentPropsWithoutRef<typeof Carousel>) {
      const autoScrollRef = React.useRef(
           AutoScroll({ playOnInit: true })
      )
@@ -26,9 +26,8 @@ export function BookCarousel({ books, ...props }: { books: Book[] } & React.Comp
      }, [autoScrollRef])
      return (
           <>
-               <div className="md:flex hidden h-full w-full max-h-full max-w-full items-center justify-center overflow-hidden">
+               <div className="flex h-full w-full max-h-full max-w-full items-center justify-center overflow-hidden md:hidden">
                     <Carousel
-                         orientation="vertical"
                          plugins={[autoScrollRef.current]}
                          opts={{
                               align: "start",
@@ -37,13 +36,13 @@ export function BookCarousel({ books, ...props }: { books: Book[] } & React.Comp
                          }}
                          {...props}
                     >
-                         <CarouselContent>
+                         <CarouselContent className="-ml-1">
                               {books.map((book) => (
                                    <CarouselItem
                                         key={book.id}
-                                        className="flex h-full w-full max-h-full max-w-full items-center justify-center gap-6 will-change-transform flex-col"
+                                        className="pl-1 basis-1/3"
                                    >
-                                        <BookCardV1 book={book} className="w-60" />
+                                        <BookCardV1 book={book} className="w-full" />
                                    </CarouselItem>
                               ))}
                          </CarouselContent>

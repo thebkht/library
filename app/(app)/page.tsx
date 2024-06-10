@@ -15,26 +15,27 @@ import { BookRecommendation } from "@/components/book-recommendation"
 import { books } from "@/data/book"
 import { BookCardV1 } from "@/components/book-card-v1"
 import { BookCarousel } from "@/components/book-carousel"
+import { BookCarouselMobile } from "@/components/book-carousel-mobile"
 
 
 export default function IndexPage() {
-  const first = books.slice(0, books.length / 2)
-  const second = books.slice(books.length / 2, books.length)
+  const first = books.slice(0, 6)
+  const second = books.slice(0, 3)
 
   return (
-    <div className="container relative">
-      <div className="flex items-start flex-none flex-row flex-nowrap h-auto justify-center w-full max-w-[1440px]">
-        <div className="flex flex-col items-start flex-[1_0_0px] flex-nowrap gap-16 h-[calc(100vh-3.5rem)] justify-center p-6 w-4 pr-24">
+    <div className="container relative mx-auto w-full">
+      <div className="flex items-start flex-none md:flex-row flex-col flex-nowrap h-auto justify-center w-full max-w-[1440px]">
+        <div className="flex flex-col items-start md:flex-[1_0_0px] flex-nowrap gap-12 md:gap-16 h-[calc(100vh-3.5rem)] justify-center p-6 md:w-4 md:pr-24 pt-32 sm:pb-16">
           <div className="flex flex-col items-start flex-none flex-nowrap gap-12 h-min justify-center p-0 w-full">
             <div className="flex flex-col items-start flex-none flex-nowrap gap-6 h-min justify-center p-0 w-full">
               <div className="flex justify-start transform-none outline-none flex-col shrink-0">
-                <h1 className="font-bold text-7xl">
+                <h1 className="font-bold md:text-7xl text-3xl md:text-left text-center">
                   a personal library of books, articles, and other resources that I&apos;ve found useful.
                 </h1>
               </div>
             </div>
           </div>
-          <div className="flex flex-none items-center flex-nowrap flex-row gap-2 h-min w-full justify-start">
+          <div className="flex flex-none items-center flex-nowrap flex-row gap-2 h-min w-full md:justify-start justify-center">
             <Link href="/browse" className={cn(buttonVariants())}>
               Get Started
             </Link>
@@ -49,7 +50,8 @@ export default function IndexPage() {
             </Link>
           </div>
         </div>
-        <div className="flex flex-nowrap items-center flex-[0.7_0_0px] flex-row gap-2 h-[calc(100vh-3.5rem)] justify-center sticky top-0 z-10 will-change-transform w-4">
+        <div className="flex flex-nowrap items-center md:flex-[0.7_0_0px] flex-row gap-2 md:h-[calc(100vh-3.5rem)] justify-center md:sticky top-0 z-10 will-change-transform md:w-4">
+          <BookCarouselMobile books={books} />
           <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 overflow-hidden w-4 h-full">
             <div className="flex-[1_0_0px] w-full h-4 relative">
               <div className="contents">
@@ -87,6 +89,6 @@ export default function IndexPage() {
           </div> */}
         </div>
       </div>
-    </div>
+    </div >
   )
 }
