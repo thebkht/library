@@ -10,6 +10,7 @@ export const books: Book[] = [
     publishedDate: "2012-01-24T12:00:00.000Z",
     purchuaseDate: "2024-02-04T12:00:00.000Z",
     type: "paperback",
+    slug: "the-man-in-the-high-castle",
   },
   {
     id: "2",
@@ -20,6 +21,7 @@ export const books: Book[] = [
     publishedDate: "1949-01-01T12:00:00.000Z",
     purchuaseDate: "2024-02-04T12:00:00.000Z",
     type: "paperback",
+    slug: "1984",
   },
   {
     id: "3",
@@ -30,6 +32,7 @@ export const books: Book[] = [
     publishedDate: "1922-01-01T12:00:00.000Z",
     purchuaseDate: "2024-02-04T12:00:00.000Z",
     type: "paperback",
+    slug: "animal-farm",
   },
   {
     id: "4",
@@ -44,6 +47,22 @@ A stunning blend of adventure and mysticism, environmentalism and politics, Dune
     publishedDate: "2005-08-02T12:00:00.000Z",
     purchuaseDate: "2024-03-21T12:00:00.000Z",
     type: "paperback",
+    slug: "dune-book1",
+  },
+  {
+    id: "17",
+    title: "Dune Messiah (Dune Chronicles, Book 2)",
+    author: "Frank Herbert",
+    cover: "/books/Dune Messiah book cover.jpg",
+    description: `Book Two in the Magnificent Dune Chronicles—the Bestselling Science Fiction Adventure of All Time
+
+Dune Messiah continues the story of Paul Atreides, better known—and feared—as the man christened Muad’Dib. As Emperor of the known universe, he possesses more power than a single man was ever meant to wield. Worshipped as a religious icon by the fanatical Fremen, Paul faces the enmity of the political houses he displaced when he assumed the throne—and a conspiracy conducted within his own sphere of influence.
+
+And even as House Atreides begins to crumble around him from the machinations of his enemies, the true threat to Paul comes to his lover, Chani, and the unborn heir to his family’s dynasty...`,
+    publishedDate: "2019-06-04T12:00:00.000Z",
+    purchuaseDate: "2024-06-10T12:00:00.000Z",
+    type: "paperback",
+    slug: "dune-book2",
   },
   {
     id: "5",
@@ -58,6 +77,7 @@ Elucidating complex ideas with engaging prose and storytelling, Reopening Muslim
     publishedDate: "2022-04-05T12:00:00.000Z",
     purchuaseDate: "2024-04-04T12:00:00.000Z",
     type: "hardcover",
+    slug: "reopening-muslim-mind",
   },
   {
     id: "6",
@@ -69,6 +89,7 @@ Elucidating complex ideas with engaging prose and storytelling, Reopening Muslim
     publishedDate: "2018-01-01T12:00:00.000Z",
     purchuaseDate: "2024-02-19T12:00:00.000Z",
     type: "paperback",
+    slug: "digital-design",
   },
   {
     id: "7",
@@ -79,6 +100,7 @@ Elucidating complex ideas with engaging prose and storytelling, Reopening Muslim
     publishedDate: "2021-02-09T12:00:00.000Z",
     purchuaseDate: "2024-04-10T12:00:00.000Z",
     type: "paperback",
+    slug: "operating-system",
   },
   {
     id: "8",
@@ -94,6 +116,7 @@ This 10th edition contains new information that highlight various technological 
     publishedDate: "2015-08-20T12:00:00.000Z",
     purchuaseDate: "2023-10-10T12:00:00.000Z",
     type: "paperback",
+    slug: "software-engineering",
   },
   {
     id: "9",
@@ -104,6 +127,7 @@ This 10th edition contains new information that highlight various technological 
     publishedDate: "2016-09-09T12:00:00.000Z",
     purchuaseDate: "2023-04-21T12:00:00.000Z",
     type: "hardcover",
+    slug: "cpp-plus-data-structures",
   },
   {
     id: "10",
@@ -114,6 +138,7 @@ This 10th edition contains new information that highlight various technological 
     publishedDate: "2012-08-01T12:00:00.000Z",
     purchuaseDate: "2023-04-18T12:00:00.000Z",
     type: "paperback",
+    slug: "advanced-engineering-math",
   },
   {
     id: "11",
@@ -125,17 +150,19 @@ This 10th edition contains new information that highlight various technological 
     publishedDate: "2018-01-01T12:00:00.000Z",
     purchuaseDate: "2022-04-23T12:00:00.000Z",
     type: "paperback",
+    slug: "csharp-7-i-dotnet-core",
   },
-  //   {
-  //     id: "12",
-  //     title: "On the Treatment of the Lust of the Stomach and the Sexual Organs",
-  //     author: "Imam Al-Ghazali",
-  //     cover: "/books/Lust of the Stomach.jpg",
-  //     description: `Al-Ghazzali discusses the obstacles on the path of faith by offering methods of treatment of the lust of the stomach and the sexual organs as well as the inner mystery of the greater struggle, the harm of checking lust and describing the harms of the lust of the sexual organs. This is Book XXII of Part Three of the Alchemy of Happiness entitled The Destroyers.`,
-  //     publishedDate: "2012-01-30T12:00:00.000Z",
-  //     purchuaseDate: "2024-05-27T12:00:00.000Z",
-  //     type: "ebook",
-  //   },
+  {
+    id: "12",
+    title: "On the Treatment of the Lust of the Stomach and the Sexual Organs",
+    author: "Imam Al-Ghazali",
+    cover: "/books/Lust of the Stomach.jpg",
+    description: `Al-Ghazzali discusses the obstacles on the path of faith by offering methods of treatment of the lust of the stomach and the sexual organs as well as the inner mystery of the greater struggle, the harm of checking lust and describing the harms of the lust of the sexual organs. This is Book XXII of Part Three of the Alchemy of Happiness entitled The Destroyers.`,
+    publishedDate: "2012-01-30T12:00:00.000Z",
+    purchuaseDate: "2024-05-27T12:00:00.000Z",
+    type: "ebook",
+    slug: "on-the-treatment-of-the-lust",
+  },
   {
     id: "13",
     title: "Introduction to Algorithms 3rd Edition",
@@ -149,6 +176,7 @@ The first edition became a widely used text in universities worldwide as well as
     publishedDate: "2009-07-31T12:00:00.000Z",
     purchuaseDate: "2024-01-05T12:00:00.000Z",
     type: "ebook",
+    slug: "introduction-to-algorithms",
   },
   {
     id: "14",
@@ -159,6 +187,7 @@ The first edition became a widely used text in universities worldwide as well as
     publishedDate: "2016-01-01T12:00:00.000Z",
     purchuaseDate: "2023-06-17T12:00:00.000Z",
     type: "ebook",
+    slug: "problem-solving-with-cpp",
   },
   {
     id: "15",
@@ -171,6 +200,7 @@ Organized around concepts and use cases, this comprehensive and complete referen
     publishedDate: "2022-03-15T12:00:00.000Z",
     purchuaseDate: "2023-06-17T12:00:00.000Z",
     type: "ebook",
+    slug: "csharp-10-in-a-nutshell",
   },
   {
     id: "16",
@@ -183,5 +213,6 @@ Aimed at intermediate and advanced programmers, this is a book whose explanation
     publishedDate: "2023-12-19T12:00:00.000Z",
     purchuaseDate: "2023-06-17T12:00:00.000Z",
     type: "ebook",
+    slug: "csharp-12-in-a-nutshell",
   },
 ];
