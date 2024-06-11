@@ -5,7 +5,7 @@ import { ModeToggle } from "./mode-toggle"
 
 export function SiteFooter() {
      return (
-          <div className="sticky bottom-0 flex-none h-auto z-50 left-0 right-0">
+          <div className="fixed bottom-0 flex-none h-auto z-50 left-0 right-0">
                <footer className="flex flex-col justify-center items-center h-min relative w-full gap-2.5 border-t border-border border-dashed bg-background">
                     <div className="flex items-center justify-between max-w-[1440px] h-14 p-6 relative w-full z-20 border-x border-dashed border-border">
                          <div className="flex flex-none items-center justify-center gap-6 relative h-min w-max">
