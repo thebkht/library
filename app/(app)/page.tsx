@@ -38,7 +38,7 @@ export default function IndexPage() {
           </div>
           <div className="flex flex-none items-center flex-nowrap flex-row gap-2 h-min w-full md:justify-start justify-center">
             <Link href="/browse" className={cn(buttonVariants())}>
-              Get Started
+              Browse
             </Link>
             <Link
               target="_blank"
