@@ -28,7 +28,7 @@ export function BookCardV2({ book, ...props }: { book: Book } & React.ComponentP
                          </AspectRatio>
                     </Link>
                     <CardHeader className="p-5 border-t border-dashed">
-                         <CardDescription>{book.author}</CardDescription>
+                         <CardDescription className="line-clamp-1">{book.author}</CardDescription>
                          <Link href={`/book/${book.slug}`}>
                               <CardTitle className="line-clamp-2 leading-snug">{book.title}</CardTitle>
                          </Link>
