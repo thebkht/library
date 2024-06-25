@@ -71,8 +71,8 @@ export default function Book({
                                                             <Image
                                                                  src={book.cover}
                                                                  alt={book.title}
-                                                                 width={200}
-                                                                 height={300}
+                                                                 fill
+                                                                 className="w-full h-auto mx-auto !relative"
                                                             />
                                                        ) : (
                                                             <Skeleton className="w-full aspect-[2/3] h-[416px] mx-auto" />
@@ -101,7 +101,7 @@ export default function Book({
                                                                  src={book.cover}
                                                                  alt={book.title}
                                                                  fill
-                                                                 className="w-full aspect-[2/3] h-auto mx-auto"
+                                                                 className="w-full h-auto mx-auto"
                                                             />
                                                        ) : (
                                                             <Skeleton className="w-full aspect-[2/3] h-[416px] mx-auto" />
