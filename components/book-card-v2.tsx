@@ -12,7 +12,7 @@ export function BookCardV2({ book, ...props }: { book: Book } & React.ComponentP
           <Card {...props}>
                <CardContent className="p-0">
                     <Link href={`/book/${book.slug}`}>
-                         <AspectRatio ratio={3 / 4} style={{ position: "relative" }}>
+                         <AspectRatio ratio={2 / 3} style={{ position: "relative" }}>
                               {
                                    book.cover !== "" ? (
                                         <Image
