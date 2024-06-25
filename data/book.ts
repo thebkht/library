@@ -186,6 +186,59 @@ A GAME OF THRONES • A CLASH OF KINGS • A STORM OF SWORDS • A FEAST FOR CRO
     slug: "strom-of-swords",
   },
   {
+    id: "24",
+    title: "A Feast for Crows (A Song of Ice and Fire, Book 4)",
+    author: "George R. R. Martin",
+    cover: "/books/A Feast for Crows Book 4.jpg",
+    description: `THE BOOK BEHIND THE FOURTH SEASON OF GAME OF THRONES, AN ORIGINAL SERIES NOW ON HBO.
+ 
+Here is the fourth book in the landmark series that has redefined imaginative fiction and become a modern masterpiece in the making.
+
+A FEAST FOR CROWS
+ 
+After centuries of bitter strife, the seven powers dividing the land have beaten one another into an uneasy truce. But it’s not long before the survivors, outlaws, renegades, and carrion eaters of the Seven Kingdoms gather. Now, as the human crows assemble over a banquet of ashes, daring new plots and dangerous new alliances are formed while surprising faces—some familiar, others only just appearing—emerge from an ominous twilight of past struggles and chaos to take up the challenges of the terrible times ahead. Nobles and commoners, soldiers and sorcerers, assassins and sages, are coming together to stake their fortunes . . . and their lives. For at a feast for crows, many are the guests—but only a few are the survivors.
+ 
+A GAME OF THRONES • A CLASH OF KINGS • A STORM OF SWORDS • A FEAST FOR CROWS • A DANCE WITH DRAGONS`,
+    publishedDate: "2002-05-28T12:00:00.000Z",
+    purchuaseDate: "2024-06-25T12:45:00.000Z",
+    type: "paperback",
+    slug: "feast-for-crows",
+  },
+  {
+    id: "25",
+    title: "A Dance with Dragons (A Song of Ice and Fire, Book 5)",
+    author: "George R. R. Martin",
+    cover: "/books/A Dance with Dragons Book 5.jpg",
+    description: `#1 NEW YORK TIMES BESTSELLER • THE BOOK BEHIND THE FIFTH SEASON OF THE ACCLAIMED HBO SERIES GAME OF THRONES
+
+NAMED ONE OF PASTE’S BEST FANTASY BOOKS OF THE DECADE
+
+Dubbed “the American Tolkien” by Time magazine, George R. R. Martin has earned international acclaim for his monumental cycle of epic fantasy. Now the #1 New York Times bestselling author delivers the fifth book in his landmark series—as both familiar faces and surprising new forces vie for a foothold in a fragmented empire.
+
+A DANCE WITH DRAGONS
+A SONG OF ICE AND FIRE: BOOK FIVE
+ 
+In the aftermath of a colossal battle, the future of the Seven Kingdoms hangs in the balance—beset by newly emerging threats from every direction. In the east, Daenerys Targaryen, the last scion of House Targaryen, rules with her three dragons as queen of a city built on dust and death. But Daenerys has thousands of enemies, and many have set out to find her. As they gather, one young man embarks upon his own quest for the queen, with an entirely different goal in mind.
+
+Fleeing from Westeros with a price on his head, Tyrion Lannister, too, is making his way to Daenerys. But his newest allies in this quest are not the rag-tag band they seem, and at their heart lies one who could undo Daenerys’s claim to Westeros forever.
+
+Meanwhile, to the north lies the mammoth Wall of ice and stone—a structure only as strong as those guarding it. There, Jon Snow, 998th Lord Commander of the Night’s Watch, will face his greatest challenge. For he has powerful foes not only within the Watch but also beyond, in the land of the creatures of ice.
+
+From all corners, bitter conflicts reignite, intimate betrayals are perpetrated, and a grand cast of outlaws and priests, soldiers and skinchangers, nobles and slaves, will face seemingly insurmountable obstacles. Some will fail, others will grow in the strength of darkness. But in a time of rising restlessness, the tides of destiny and politics will lead inevitably to the greatest dance of all.
+
+Praise for A Dance with Dragons
+ 
+“Filled with vividly rendered set pieces, unexpected turnings, assorted cliffhangers and moments of appalling cruelty, A Dance with Dragons is epic fantasy as it should be written: passionate, compelling, convincingly detailed and thoroughly imagined.”—The Washington Post
+ 
+“Long live George Martin . . . a literary dervish, enthralled by complicated characters and vivid language, and bursting with the wild vision of the very best tale tellers.”—The New York Times
+ 
+“One of the best series in the history of fantasy.”—Los Angeles Times `,
+    publishedDate: "2002-05-28T12:00:00.000Z",
+    purchuaseDate: "2024-06-25T12:45:00.000Z",
+    type: "paperback",
+    slug: "dance-with-dragons",
+  },
+  {
     id: "5",
     title: "Reopening Muslim Minds",
     author: "Mustafa Akyol",
