@@ -10,6 +10,7 @@ const bookSchema = z.object({
   purchuaseDate: z.string(),
   type: z.enum(["hardcover", "paperback", "ebook", "audiobook"]),
   slug: z.string(),
+  isbn: z.string().optional(),
 });
 
 export type Book = z.infer<typeof bookSchema>;
