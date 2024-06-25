@@ -19,9 +19,9 @@ import { BookCarouselMobile } from "@/components/book-carousel-mobile"
 
 
 export default function IndexPage() {
-  const first = books.slice(0, 3)
-  const second = books.slice(3, 6)
-  const third = books.slice(6, 9)
+  const first = books.slice(0, 4)
+  const second = books.slice(4, 8)
+  const third = books.slice(9, 13)
 
   return (
     <div className="container relative mx-auto w-full sm:p-0">
