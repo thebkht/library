@@ -66,7 +66,7 @@ export default function Book({
                               <div className="w-11/12 mx-auto">
                                    <div className="flex min-h-5 mb-5 mx-auto">
                                         <div className="inline-block">
-                                             <div className="relative">
+                                             <div className="relative pointer-events-none">
                                                   {
                                                        book.cover ? (
                                                             <Image
