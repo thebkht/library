@@ -170,7 +170,7 @@ A comet the color of blood and flame cuts across the sky. Two great leaders—Lo
     id: "23",
     title: "A Storm of Swords (A Song of Ice and Fire, Book 3)",
     author: "George R. R. Martin",
-    cover: "/books/A Strorm of Swords.jpg",
+    cover: "/books/A Storm of Swords.jpg",
     description: `THE BOOK BEHIND THE THIRD SEASON OF GAME OF THRONES, AN ORIGINAL SERIES NOW ON HBO.
 
 Here is the third book in the landmark series that has redefined imaginative fiction and become a modern masterpiece.
