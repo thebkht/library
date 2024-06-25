@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { siteConfig } from "@/config/site";
 import { getBookBySlug } from "@/lib/books";
+import { formatDate } from "@/lib/date";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -138,6 +139,17 @@ export default function Book({
                                              </div>
                                         </div>
                                    </div>
+                              </div>
+                              <div className="my-3 space-y-2">
+                                   <h3 className="font-normal text-muted-foreground capitalize">
+                                        Format: {book.type}
+                                   </h3>
+                                   <h3 className="font-normal text-muted-foreground">
+                                        Published Date: {formatDate(book.publishedDate)}
+                                   </h3>
+                                   <h3 className="font-normal text-muted-foreground">
+                                        Purchuase Date: {formatDate(book.purchuaseDate)}
+                                   </h3>
                               </div>
                          </div>
                     </div>
