@@ -82,11 +82,11 @@ export default function Book({
                                         </div>
                                    </div>
                               </div>
-                              {/* <div className="flex flex-col my-4 gap-2">
-                                   <Button>
-                                        Want to read
+                              <div className="flex flex-col my-4 gap-2">
+                                   <Button disabled>
+                                        borrow
                                    </Button>
-                              </div> */}
+                              </div>
                          </div>
                     </div>
                     <div className="col-span-9 relative overflow-hidden ml-8">
