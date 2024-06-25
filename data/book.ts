@@ -34,19 +34,19 @@ export const books: Book[] = [
     type: "paperback",
     slug: "animal-farm",
   },
-  {
-    id: "19",
-    title: "Fight Club: A Novel",
-    author: "Chuck Palahniuk",
-    cover: "/books/Fight Club Novel.jpg",
-    description: `The first rule about fight club is you don't talk about fight club.
+  //   {
+  //     id: "19",
+  //     title: "Fight Club: A Novel",
+  //     author: "Chuck Palahniuk",
+  //     cover: "/books/Fight Club Novel.jpg",
+  //     description: `The first rule about fight club is you don't talk about fight club.
 
-Chuck Palahniuk showed himself to be his generation’s most visionary satirist in this, his first book. Fight Club’s estranged narrator leaves his lackluster job when he comes under the thrall of Tyler Durden, an enigmatic young man who holds secret after-hours boxing matches in the basements of bars. There, two men fight "as long as they have to." This is a gloriously original work that exposes the darkness at the core of our modern world.`,
-    publishedDate: "2018-05-01T12:00:00.000Z",
-    purchuaseDate: "2024-06-14T12:00:00.000Z",
-    type: "paperback",
-    slug: "fight-club",
-  },
+  // Chuck Palahniuk showed himself to be his generation’s most visionary satirist in this, his first book. Fight Club’s estranged narrator leaves his lackluster job when he comes under the thrall of Tyler Durden, an enigmatic young man who holds secret after-hours boxing matches in the basements of bars. There, two men fight "as long as they have to." This is a gloriously original work that exposes the darkness at the core of our modern world.`,
+  //     publishedDate: "2018-05-01T12:00:00.000Z",
+  //     purchuaseDate: "2024-06-14T12:00:00.000Z",
+  //     type: "paperback",
+  //     slug: "fight-club",
+  //   },
   {
     id: "20",
     title: "Don't Believe Everything You Think",
@@ -133,7 +133,7 @@ Some laws teach the need for prudence (“Law 1: Never Outshine the Master”), 
     slug: "48-laws-of-power",
   },
   {
-    id: "19",
+    id: "21",
     title: "A Game of Thrones (A Song of Ice and Fire, Book 1)",
     author: "George R. R. Martin",
     cover: "/books/Game of Thrones Book 1.jpg",
@@ -150,7 +150,7 @@ Meanwhile, across the Narrow Sea, Prince Viserys, heir of the fallen House Targa
     slug: "game-of-thrones",
   },
   {
-    id: "20",
+    id: "22",
     title: "A Clash of Kings (A Song of Ice and Fire, Book 2)",
     author: "George R. R. Martin",
     cover: "/books/A Clash of Kings.jpg",
@@ -165,6 +165,25 @@ A comet the color of blood and flame cuts across the sky. Two great leaders—Lo
     purchuaseDate: "2024-06-25T12:45:00.000Z",
     type: "paperback",
     slug: "clash-of-kings",
+  },
+  {
+    id: "23",
+    title: "A Storm of Swords (A Song of Ice and Fire, Book 3)",
+    author: "George R. R. Martin",
+    cover: "/books/A Strorm of Swords.jpg",
+    description: `THE BOOK BEHIND THE THIRD SEASON OF GAME OF THRONES, AN ORIGINAL SERIES NOW ON HBO.
+
+Here is the third book in the landmark series that has redefined imaginative fiction and become a modern masterpiece.
+
+A STORM OF SWORDS
+ 
+Of the five contenders for power, one is dead, another in disfavor, and still the wars rage. Joffrey sits on the Iron Throne, the uneasy ruler of the Seven Kingdoms. His most bitter rival, Lord Stannis, stands defeated and disgraced, victim of the sorceress who holds him in her thrall. Young Robb still rules the North from the fortress of Riverrun. Meanwhile, making her way across a blood-drenched continent is the exiled queen, Daenerys, mistress of the only three dragons left in the world. As opposing forces maneuver for the final showdown, an army of barbaric wildlings arrives from the outermost limits of civilization, accompanied by a supernatural army of the living dead. As the future of the land hangs in the balance, no one will rest until the Seven Kingdoms have exploded in a veritable storm of swords. . . .
+ 
+A GAME OF THRONES • A CLASH OF KINGS • A STORM OF SWORDS • A FEAST FOR CROWS • A DANCE WITH DRAGONS`,
+    publishedDate: "2002-05-28T12:00:00.000Z",
+    purchuaseDate: "2024-06-25T12:45:00.000Z",
+    type: "paperback",
+    slug: "strom-of-swords",
   },
   {
     id: "5",
