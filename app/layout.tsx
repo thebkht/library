@@ -8,7 +8,7 @@ import { ThemeProvider } from "next-themes";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
+});
 
 export const metadata: Metadata = {
   title: {
@@ -53,17 +53,17 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
-}
+};
 
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-}
+};
 
 interface RootLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -84,9 +84,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             disableTransitionOnChange
           >
             <div vaul-drawer-wrapper="">
-              <div className="flex-none h-screen pointer-events-none fixed top-0 w-full z-[200]">
-                <div className="noise" />
-              </div>
               <div className="relative flex min-h-screen flex-col bg-background">
                 {children}
               </div>
@@ -101,5 +98,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </body>
       </html>
     </>
-  )
+  );
 }
