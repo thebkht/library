@@ -1,27 +1,20 @@
-import Image from "next/image"
-import Link from "next/link"
+import Link from "next/link";
 
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { Icons } from "@/components/icons"
-import {
-  PageActions,
-  PageHeader,
-  PageHeaderDescription,
-  PageHeaderHeading,
-} from "@/components/page-header"
-import { buttonVariants } from "@/components/ui/button"
-import { BookRecommendation } from "@/components/book-recommendation"
-import { books } from "@/data/book"
-import { BookCardV1 } from "@/components/book-card-v1"
-import { BookCarousel } from "@/components/book-carousel"
-import { BookCarouselMobile } from "@/components/book-carousel-mobile"
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { Icons } from "@/components/icons";
+import { buttonVariants } from "@/components/ui/button";
+import { BookCarousel } from "@/components/book-carousel";
+import { BookCarouselMobile } from "@/components/book-carousel-mobile";
+import { getBooks } from "@/lib/fetchers";
 
-
-export default function IndexPage() {
-  const first = books.slice(0, 4)
-  const second = books.slice(4, 8)
-  const third = books.slice(9, 13)
+export default async function IndexPage() {
+  const data = await getBooks();
+  console.log(data);
+  const books = data.map((book) => book);
+  const first = books.slice(0, 4);
+  const second = books.slice(4, 8);
+  const third = books.slice(9, 13);
 
   return (
     <div className="container relative mx-auto w-full sm:p-0">
@@ -31,7 +24,8 @@ export default function IndexPage() {
             <div className="flex flex-col items-start flex-none flex-nowrap gap-6 h-min justify-center p-0 w-full">
               <div className="flex justify-start transform-none outline-none flex-col shrink-0">
                 <h1 className="font-bold lg:text-6xl md:text-5xl text-3xl md:text-left text-center">
-                  a personal library of books, articles, and other resources that I&apos;ve found useful.
+                  a personal library of books, articles, and other resources
+                  that I&apos;ve found useful.
                 </h1>
               </div>
             </div>
@@ -63,27 +57,33 @@ export default function IndexPage() {
           <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 pt-6 overflow-hidden w-4 h-full">
             <div className="flex-[1_0_0px] w-full h-4 relative">
               <div className="contents">
-                <BookCarousel books={second} opts={{
-                  align: "end",
-                  dragFree: true,
-                  loop: true,
-                }} />
+                <BookCarousel
+                  books={second}
+                  opts={{
+                    align: "end",
+                    dragFree: true,
+                    loop: true,
+                  }}
+                />
               </div>
             </div>
           </div>
           <div className="xl:flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 pt-14 overflow-hidden w-4 h-full hidden">
             <div className="flex-[1_0_0px] w-full h-4 relative">
               <div className="contents">
-                <BookCarousel books={third} opts={{
-                  align: "end",
-                  dragFree: true,
-                  loop: true,
-                }} />
+                <BookCarousel
+                  books={third}
+                  opts={{
+                    align: "end",
+                    dragFree: true,
+                    loop: true,
+                  }}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div >
-  )
+    </div>
+  );
 }
