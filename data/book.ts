@@ -1,6 +1,6 @@
-import { Book } from "@/lib/types/book";
+import { type LegacyBookSeed } from "@/lib/types/book";
 
-export const books: Book[] = [
+export const books: LegacyBookSeed[] = [
   {
     id: "1",
     title: "The Man in the High Castle",
