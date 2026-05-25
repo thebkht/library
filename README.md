@@ -6,7 +6,7 @@
 
 1. Install dependencies with `pnpm install`.
 2. Copy `.env.example` to `.env.local` and fill in the required values.
-3. Apply the SQL in [lib/db/schema.sql](/Users/thebkht/Projects/library/lib/db/schema.sql).
+3. Run `pnpm db:migrate:books` to create the `books` table from [lib/db/schema.sql](/Users/thebkht/Projects/library/lib/db/schema.sql).
 4. Run `pnpm db:migrate:auth` to create Better Auth tables.
 5. Run `pnpm seed:books`.
 6. Run `pnpm seed:admin`.

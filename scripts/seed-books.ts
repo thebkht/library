@@ -102,6 +102,13 @@ async function main() {
 }
 
 main().catch((error) => {
+  if (error && typeof error === "object" && "code" in error && error.code === "42P01") {
+    console.error(
+      'Books table does not exist. Run "pnpm db:migrate:books" first, then rerun the seed.'
+    );
+    process.exit(1);
+  }
+
   console.error(error);
   process.exit(1);
 });
