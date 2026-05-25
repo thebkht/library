@@ -134,6 +134,10 @@ export async function deleteBook(id: string): Promise<Book | null> {
 
 export async function getStats() {
   const books = await listBooks();
+  const genres = books.reduce<Record<string, number>>((acc, book) => {
+    acc[book.genre] = (acc[book.genre] ?? 0) + 1;
+    return acc;
+  }, {});
   const formats = books.reduce<Record<string, number>>((acc, book) => {
     acc[book.format] = (acc[book.format] ?? 0) + 1;
     return acc;
@@ -146,11 +150,7 @@ export async function getStats() {
 
   return {
     total: books.length,
-    genres: {
-      Fiction: books.filter((book) => book.genre === "Fiction").length,
-      Nonfiction: books.filter((book) => book.genre === "Nonfiction").length,
-      Poetry: books.filter((book) => book.genre === "Poetry").length,
-    },
+    genres,
     formats,
     lastUpdated,
   };

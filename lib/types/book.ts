@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-export const BOOK_GENRES = ["Fiction", "Nonfiction", "Poetry"] as const;
 export const BOOK_FORMATS = [
   "Hardcover",
   "Paperback",
@@ -13,7 +12,7 @@ export const bookSchema = z.object({
   id: z.string(),
   title: z.string().min(1),
   author: z.union([z.string().min(1), z.array(z.string().min(1)).min(1)]),
-  genre: z.enum(BOOK_GENRES),
+  genre: z.string().trim().min(1),
   format: z.enum(BOOK_FORMATS),
   image: z.union([z.string().url(), z.string().startsWith("/")]),
   dateAdded: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -24,7 +23,7 @@ export const bookInputSchema = bookSchema.omit({ id: true });
 
 export type Book = z.infer<typeof bookSchema>;
 export type BookInput = z.infer<typeof bookInputSchema>;
-export type BookGenre = (typeof BOOK_GENRES)[number];
+export type BookGenre = Book["genre"];
 export type BookFormat = (typeof BOOK_FORMATS)[number];
 
 export type LegacyBookSeed = {

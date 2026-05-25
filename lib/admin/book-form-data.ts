@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { BOOK_FORMATS, BOOK_GENRES, type BookInput } from "@/lib/types/book";
+import { BOOK_FORMATS, type BookInput } from "@/lib/types/book";
 
 const formSchema = z.object({
   title: z.string().min(1),
   author: z.string().min(1),
-  genre: z.enum(BOOK_GENRES),
+  genre: z.string().trim().min(1),
   format: z.enum(BOOK_FORMATS),
   dateAdded: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   notes: z.string().optional(),

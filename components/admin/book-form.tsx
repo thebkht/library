@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
-import { BOOK_FORMATS, BOOK_GENRES, authorKey, type Book } from "@/lib/types/book";
+import { BOOK_FORMATS, authorKey, type Book } from "@/lib/types/book";
 
 type BookFormProps = {
   book?: Book;
@@ -66,17 +66,12 @@ export function BookForm({ book, mode }: BookFormProps) {
         </label>
         <label className="space-y-2">
           <span className="text-sm text-muted-foreground">Genre</span>
-          <select
+          <input
             name="genre"
-            defaultValue={book?.genre ?? BOOK_GENRES[0]}
+            defaultValue={book?.genre ?? ""}
+            required
             className="w-full rounded-2xl border border-border bg-card px-4 py-3 outline-none transition focus:border-foreground"
-          >
-            {BOOK_GENRES.map((genre) => (
-              <option key={genre} value={genre}>
-                {genre}
-              </option>
-            ))}
-          </select>
+          />
         </label>
         <label className="space-y-2">
           <span className="text-sm text-muted-foreground">Format</span>

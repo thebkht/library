@@ -12,7 +12,6 @@ import {
 } from "@/lib/archive/search-params";
 import {
   BOOK_FORMATS,
-  BOOK_GENRES,
   authorKey,
   normalizeAuthor,
   type Book,
@@ -57,6 +56,10 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
   const [hoveredBookId, setHoveredBookId] = useState<string | null>(null);
   const [authorsOpen, setAuthorsOpen] = useState(true);
   const galleryViewportRef = useRef<HTMLDivElement | null>(null);
+  const genreOptions = useMemo(
+    () => Array.from(new Set(books.map((book) => book.genre))).sort((a, b) => a.localeCompare(b)),
+    [books],
+  );
 
   const authorCounts = useMemo<AuthorCount[]>(() => {
     const counts = new Map<string, number>();
@@ -160,7 +163,7 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
               </Link>
 
               <nav className="mt-7 hidden flex-col gap-[3px] text-[13px] font-semibold leading-none md:flex">
-                {(["All", ...BOOK_GENRES] as const).map((genre) => (
+                {(["All", ...genreOptions] as const).map((genre) => (
                   <button
                     key={genre}
                     type="button"
@@ -220,7 +223,7 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
 
               <div className="mt-4 flex flex-col gap-3 md:hidden">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12px] font-semibold">
-                  {(["All", ...BOOK_GENRES] as const).map((genre) => (
+                  {(["All", ...genreOptions] as const).map((genre) => (
                     <button
                       key={genre}
                       type="button"
