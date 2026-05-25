@@ -6,80 +6,154 @@
   --font-display: var(--font-heading);
   --font-serif: var(--font-body);
 
-  --color-paper: hsl(var(--paper));
-  --color-ink: hsl(var(--ink));
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
 
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --color-card: #ffffff;
+  --color-card-foreground: var(--ink);
+  --color-popover: #ffffff;
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--paper);
+  --color-secondary: #ecece6;
+  --color-secondary-foreground: var(--ink);
+  --color-muted-foreground: var(--muted);
+  --color-accent: #ecece6;
+  --color-accent-foreground: var(--ink);
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
+  --color-border: var(--rule);
+  --color-input: var(--rule);
+  --color-ring: var(--ink);
 }
 
 @layer base {
   :root {
-    --paper: 39 33% 97%;
-    --ink: 24 17% 16%;
-    --background: 35 36% 96%;
-    --foreground: 24 18% 16%;
-
-    --card: 34 33% 98%;
-    --card-foreground: 24 18% 16%;
-
-    --popover: 34 33% 98%;
-    --popover-foreground: 24 18% 16%;
-
-    --primary: 24 21% 18%;
-    --primary-foreground: 35 36% 96%;
-
-    --secondary: 34 23% 90%;
-    --secondary-foreground: 24 18% 16%;
-
-    --muted: 30 19% 89%;
-    --muted-foreground: 23 9% 39%;
-
-    --accent: 18 26% 86%;
-    --accent-foreground: 24 18% 16%;
-
-    --destructive: 3 62% 48%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 28 18% 78%;
-    --input: 28 18% 78%;
-    --ring: 24 21% 18%;
-
+    --paper: #f3f4ef;
+    --ink: #1f1f1f;
+    --muted: #6e6e6e;
+    --rule: #e3e3de;
     --radius: 0.75rem;
   }
-}
 
-@layer base {
   * {
+    box-sizing: border-box;
     @apply border-border;
   }
 
   html {
     scroll-behavior: smooth;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    @apply bg-paper text-ink;
+    margin: 0;
+    @apply bg-paper text-ink antialiased;
+    font-feature-settings: "ss01", "ss02";
+    text-rendering: optimizeLegibility;
   }
 
   a {
     @apply transition-colors;
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+  }
+
+  button {
+    background-color: transparent;
+    background-image: none;
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  ::-moz-selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  .hairline {
+    border-color: var(--rule);
+  }
+
+  .book-caption {
+    display: block;
+    max-width: 100%;
+    margin-top: 0.5rem;
+    padding: 0 0.25rem;
+    text-align: center;
+  }
+
+  .book-grid {
+    row-gap: 1.25rem;
+  }
+
+  @media (hover: hover) and (min-width: 768px) {
+    .book-caption {
+      pointer-events: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      z-index: 10;
+      width: 140%;
+      max-width: 180px;
+      margin-top: 0.625rem;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    figure:hover .book-caption {
+      opacity: 1;
+    }
+
+    .book-grid {
+      row-gap: 3.5rem;
+    }
+
+    .book-grid > figure,
+    .book-list > button {
+      will-change: filter, opacity;
+      transition:
+        filter 0.52s cubic-bezier(0.22, 0.61, 0.36, 1),
+        opacity 0.52s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .book-grid:has(figure:hover) > figure:not(:hover),
+    .book-list:has(> button:hover) > button:not(:hover) {
+      filter: blur(2px);
+      opacity: 0.55;
+    }
   }
 }

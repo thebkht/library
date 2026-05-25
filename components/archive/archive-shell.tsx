@@ -5,7 +5,11 @@ import Link from "next/link";
 import { type ReactNode, useMemo, useState } from "react";
 import { useQueryStates } from "nuqs";
 import { formatDate } from "@/lib/date";
-import { archiveSearchParams, sortModes, viewModes } from "@/lib/archive/search-params";
+import {
+  archiveSearchParams,
+  sortModes,
+  viewModes,
+} from "@/lib/archive/search-params";
 import {
   BOOK_FORMATS,
   BOOK_GENRES,
@@ -20,14 +24,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 type Stats = {
   total: number;
@@ -59,12 +55,14 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
     shallow: false,
   });
   const [hoveredBookId, setHoveredBookId] = useState<string | null>(null);
+  const [authorsOpen, setAuthorsOpen] = useState(true);
 
   const authorCounts = useMemo<AuthorCount[]>(() => {
     const counts = new Map<string, number>();
     for (const book of books) {
-      const key = authorKey(book.author);
-      counts.set(key, (counts.get(key) ?? 0) + 1);
+      for (const author of normalizeAuthor(book.author)) {
+        counts.set(author, (counts.get(author) ?? 0) + 1);
+      }
     }
     return Array.from(counts.entries())
       .map(([name, count]) => ({ name, count }))
@@ -73,9 +71,15 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
 
   const filteredBooks = useMemo(() => {
     const next = books
-      .filter((book) => (params.genre === "All" ? true : book.genre === params.genre))
-      .filter((book) => (params.format === "All" ? true : book.format === params.format))
-      .filter((book) => (params.author ? authorKey(book.author) === params.author : true))
+      .filter((book) =>
+        params.genre === "All" ? true : book.genre === params.genre,
+      )
+      .filter((book) =>
+        params.format === "All" ? true : book.format === params.format,
+      )
+      .filter((book) =>
+        params.author ? normalizeAuthor(book.author).includes(params.author) : true,
+      )
       .slice();
 
     next.sort((left, right) => {
@@ -96,7 +100,10 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
     books.find((book) => book.id === params.book) ??
     null;
 
-  const lastUpdated = stats.lastUpdated ? formatDate(stats.lastUpdated) : "Unpublished";
+  const lastUpdated = stats.lastUpdated
+    ? formatDate(stats.lastUpdated)
+    : "Unpublished";
+  const isListView = params.view === "list";
 
   return (
     <>
@@ -156,27 +163,13 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
                 ))}
               </div>
 
-              <div className="mt-7 hidden flex-col gap-[3px] text-[13px] font-semibold leading-none md:flex">
-                <div className="mb-0.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
-                  Format
-                </div>
-                {(["All", ...BOOK_FORMATS] as const).map((format) => (
-                  <button
-                    key={format}
-                    type="button"
-                    className={navButtonClass(params.format === format)}
-                    onClick={() => setParams({ format })}
-                  >
-                    {format}
-                  </button>
-                ))}
-              </div>
-
               <div className="mt-7 hidden text-[12px] font-semibold leading-snug md:block">
                 <AuthorRail
                   authors={authorCounts}
                   selectedAuthor={params.author}
                   onSelect={(author) => setParams({ author, book: null })}
+                  open={authorsOpen}
+                  onToggle={() => setAuthorsOpen((open) => !open)}
                 />
               </div>
 
@@ -223,119 +216,100 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
                     </button>
                   ))}
                 </div>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
-                  <span>Format</span>
-                  {(["All", ...BOOK_FORMATS] as const).map((format) => (
-                    <button
-                      key={format}
-                      type="button"
-                      className={mobileInlineClass(params.format === format)}
-                      onClick={() => setParams({ format })}
-                    >
-                      {format}
-                    </button>
-                  ))}
-                </div>
                 <div className="flex flex-col gap-1.5 text-[12px] font-semibold leading-snug">
-                  <Sheet>
-                    <SheetTrigger asChild>
-                      <button
-                        type="button"
-                        className="flex items-center gap-2 py-1.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground"
-                      >
-                        <span>Authors</span>
-                        <span className="text-[14px] font-bold leading-none text-ink">+</span>
-                        <span className="text-[10px] text-muted-foreground">({authorCounts.length})</span>
-                      </button>
-                    </SheetTrigger>
-                    <SheetContent side="right" className="bg-paper">
-                      <SheetHeader>
-                        <SheetTitle className="text-left text-[14px] font-semibold tracking-tight text-ink">
-                          Authors
-                        </SheetTitle>
-                        <SheetDescription className="text-left text-[12px] text-muted-foreground">
-                          Filter the archive by author.
-                        </SheetDescription>
-                      </SheetHeader>
-                      <div className="mt-6">
-                        <AuthorRail
-                          authors={authorCounts}
-                          selectedAuthor={params.author}
-                          onSelect={(author) => setParams({ author, book: null })}
-                        />
-                      </div>
-                    </SheetContent>
-                  </Sheet>
+                  <MobileAuthors
+                    authors={authorCounts}
+                    selectedAuthor={params.author}
+                    onSelect={(author) => setParams({ author, book: null })}
+                    open={authorsOpen}
+                    onToggle={() => setAuthorsOpen((open) => !open)}
+                  />
                 </div>
               </div>
             </aside>
 
             <section className="min-w-0 flex-1">
-              <div className={gridClass(params.view)}>
-                {filteredBooks.map((book) => (
-                  <button
-                    key={book.id}
-                    type="button"
-                    onClick={() => setParams({ book: book.id })}
-                    onMouseEnter={() => {
-                      if (params.view !== "list") {
-                        setHoveredBookId(book.id);
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (params.view !== "list") {
-                        setHoveredBookId(null);
-                      }
-                    }}
-                    onFocus={() => {
-                      if (params.view !== "list") {
-                        setHoveredBookId(book.id);
-                      }
-                    }}
-                    onBlur={() => {
-                      if (params.view !== "list") {
-                        setHoveredBookId(null);
-                      }
-                    }}
-                    className={bookCardClass(
-                      params.view,
-                      hoveredBookId !== null && hoveredBookId !== book.id
-                    )}
-                  >
-                    <div className={imageWrapClass(params.view)}>
-                      <Image
-                        src={book.image}
-                        alt={book.title}
-                        fill
-                        sizes={
-                          params.view === "gallery"
-                            ? "(max-width: 1024px) 50vw, 25vw"
-                            : "(max-width: 1024px) 33vw, 18vw"
-                        }
-                        className={imageClass(
-                          params.view,
-                          hoveredBookId !== null && hoveredBookId !== book.id
-                        )}
-                      />
-                    </div>
-                    <figcaption className={metaClass(params.view)}>
-                      <div className="text-[11px] font-semibold leading-tight text-ink">
+              {isListView ? (
+                <div className="book-list flex flex-col">
+                  {filteredBooks.map((book, index) => (
+                    <button
+                      key={book.id}
+                      type="button"
+                      onClick={() => setParams({ book: book.id })}
+                      className={[
+                        "grid grid-cols-[3fr_2fr] items-baseline gap-6 py-2.5 text-left",
+                        index === 0 ? "" : "border-t border-border/70",
+                      ].join(" ")}
+                    >
+                      <div className="min-w-0 text-[14px] font-semibold leading-tight text-ink">
                         {book.title}
                       </div>
-                      <div className="mt-0.5 text-[10px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
+                      <div className="break-words text-right text-[11px] font-medium uppercase leading-snug tracking-[0.04em] text-muted-foreground">
                         {authorKey(book.author)}
                       </div>
-                    </figcaption>
-                  </button>
-                ))}
-              </div>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className={gridClass(params.view)}>
+                  {filteredBooks.map((book) => (
+                    <button
+                      key={book.id}
+                      type="button"
+                      onClick={() => setParams({ book: book.id })}
+                      onMouseEnter={() => {
+                        setHoveredBookId(book.id);
+                      }}
+                      onMouseLeave={() => {
+                        setHoveredBookId(null);
+                      }}
+                      onFocus={() => {
+                        setHoveredBookId(book.id);
+                      }}
+                      onBlur={() => {
+                        setHoveredBookId(null);
+                      }}
+                      className={bookCardClass(
+                        params.view,
+                        hoveredBookId !== null && hoveredBookId !== book.id,
+                      )}
+                    >
+                      <div className={imageWrapClass(params.view)}>
+                        <Image
+                          src={book.image}
+                          alt={book.title}
+                          fill
+                          sizes={
+                            params.view === "gallery"
+                              ? "(max-width: 1024px) 50vw, 25vw"
+                              : "(max-width: 1024px) 33vw, 18vw"
+                          }
+                          className={imageClass(
+                            params.view,
+                            hoveredBookId !== null && hoveredBookId !== book.id,
+                          )}
+                        />
+                      </div>
+                      <figcaption className={metaClass(params.view)}>
+                        <div className="text-[11px] font-semibold leading-tight text-ink">
+                          {book.title}
+                        </div>
+                        <div className="mt-0.5 text-[10px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
+                          {authorKey(book.author)}
+                        </div>
+                      </figcaption>
+                    </button>
+                  ))}
+                </div>
+              )}
             </section>
           </div>
         </div>
 
         <footer className="mx-auto w-full max-w-[1400px] px-4 pb-8 sm:px-6 sm:pb-10">
           <p className="mb-3 max-w-2xl text-[12px] leading-snug text-muted-foreground sm:mb-4">
-            an archive of physical books I own, not including art books, photo books, or zines
+            an archive of physical books I own, not including art books, photo
+            books, or zines
           </p>
           <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2 text-[12px] font-medium leading-snug text-muted-foreground">
             <div className="flex flex-col gap-0.5">
@@ -394,7 +368,9 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
                 <div className="mt-6 flex flex-wrap gap-2 text-sm">
                   <span className={badgeClass}>{selectedBook.genre}</span>
                   <span className={badgeClass}>{selectedBook.format}</span>
-                  <span className={badgeClass}>Added {formatDate(selectedBook.dateAdded)}</span>
+                  <span className={badgeClass}>
+                    Added {formatDate(selectedBook.dateAdded)}
+                  </span>
                 </div>
                 <div className="mt-6 space-y-4 text-[15px] leading-7 text-foreground/85">
                   <p>
@@ -405,7 +381,9 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
                     <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
                       Authors
                     </p>
-                    <p className="mt-2">{normalizeAuthor(selectedBook.author).join(", ")}</p>
+                    <p className="mt-2">
+                      {normalizeAuthor(selectedBook.author).join(", ")}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -421,83 +399,129 @@ function AuthorRail({
   authors,
   selectedAuthor,
   onSelect,
+  open,
+  onToggle,
 }: {
   authors: AuthorCount[];
   selectedAuthor: string | null;
   onSelect: (author: string | null) => void;
+  open: boolean;
+  onToggle: () => void;
 }) {
-  const visibleAuthors = authors.slice(0, 18);
-  const hiddenAuthors = authors.slice(18);
-
   return (
-    <div>
+    <div className="flex flex-col gap-[3px]">
       <button
         type="button"
-        className="mb-0.5 flex items-center justify-between gap-3 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground hover:text-ink"
-        onClick={() => onSelect(null)}
+        className="mb-0.5 flex items-center justify-between gap-3 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted hover:text-ink"
+        onClick={onToggle}
+        aria-expanded={open}
       >
         <span className="flex items-baseline gap-2">
           <span>Authors</span>
           <span className="text-[10px] tabular-nums">({authors.length})</span>
         </span>
-        <span className="text-[14px] font-bold leading-none text-ink">+</span>
+        <span className="text-[14px] font-bold leading-none tabular-nums text-ink">
+          {open ? "−" : "+"}
+        </span>
       </button>
-      <div className="space-y-[3px] pt-3">
-        {visibleAuthors.map((author) => (
-          <button
-            key={author.name}
-            type="button"
-            className={authorRowClass(selectedAuthor === author.name)}
-            onClick={() => onSelect(selectedAuthor === author.name ? null : author.name)}
-          >
-            <span>{author.name}</span>
-            <span>{author.count}</span>
-          </button>
-        ))}
-      </div>
-      {hiddenAuthors.length > 0 ? (
-        <details className="group">
-          <summary className="mt-3 cursor-pointer text-[11px] uppercase tracking-[0.04em] text-muted-foreground">
-            Show {hiddenAuthors.length} more
-          </summary>
-          <div className="mt-3 space-y-[3px]">
-            {hiddenAuthors.map((author) => (
-              <button
-                key={author.name}
-                type="button"
-                className={authorRowClass(selectedAuthor === author.name)}
-                onClick={() => onSelect(selectedAuthor === author.name ? null : author.name)}
-              >
-                <span>{author.name}</span>
-                <span>{author.count}</span>
-              </button>
-            ))}
-          </div>
-        </details>
+      {open ? (
+        <>
+          {authors.map((author) => (
+            <button
+              key={author.name}
+              type="button"
+              className={sidebarAuthorClass(selectedAuthor === author.name)}
+              onClick={() =>
+                onSelect(selectedAuthor === author.name ? null : author.name)
+              }
+            >
+              {author.name}
+            </button>
+          ))}
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+function MobileAuthors({
+  authors,
+  selectedAuthor,
+  onSelect,
+  open,
+  onToggle,
+}: {
+  authors: AuthorCount[];
+  selectedAuthor: string | null;
+  onSelect: (author: string | null) => void;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="flex flex-col gap-1.5 text-[12px] font-semibold leading-snug">
+      <button
+        type="button"
+        className="flex items-center gap-2 py-1.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted"
+        onClick={onToggle}
+        aria-expanded={open}
+      >
+        <span>Authors</span>
+        <span className="text-[14px] font-bold leading-none tabular-nums text-ink">
+          {open ? "−" : "+"}
+        </span>
+        <span className="text-[10px] text-muted">({authors.length})</span>
+      </button>
+      {open ? (
+        <div className="flex flex-wrap gap-x-4 gap-y-1">
+          {authors.map((author) => (
+            <button
+              key={author.name}
+              type="button"
+              className={mobileAuthorClass(selectedAuthor === author.name)}
+              onClick={() =>
+                onSelect(selectedAuthor === author.name ? null : author.name)
+              }
+            >
+              {author.name}
+            </button>
+          ))}
+        </div>
       ) : null}
     </div>
   );
 }
 
 const badgeClass =
-  "rounded-full border border-border bg-background px-3 py-1 text-xs uppercase tracking-[0.18em] text-muted-foreground";
+  "rounded-full border border-border bg-background px-3 py-1 text-xs uppercase tracking-[0.18em] text-muted";
 
 function navButtonClass(active: boolean) {
   return active
     ? "py-1.5 text-left transition-colors md:py-[2px] text-ink"
-    : "py-1.5 text-left transition-colors md:py-[2px] text-muted-foreground hover:text-ink";
+    : "py-1.5 text-left transition-colors md:py-[2px] text-muted hover:text-ink";
 }
 
 function mobileInlineClass(active: boolean) {
   return active
     ? "py-1.5 text-left transition-colors md:py-[2px] text-ink"
-    : "py-1.5 text-left transition-colors md:py-[2px] text-muted-foreground hover:text-ink";
+    : "py-1.5 text-left transition-colors md:py-[2px] text-muted hover:text-ink";
 }
 
 function authorRowClass(active: boolean) {
   return active
     ? "flex w-full items-center justify-between py-1.5 text-left text-[13px] font-semibold leading-none text-ink md:py-[2px]"
-    : "flex w-full items-center justify-between py-1.5 text-left text-[13px] font-semibold leading-none text-muted-foreground transition-colors hover:text-ink md:py-[2px]";
+    : "flex w-full items-center justify-between py-1.5 text-left text-[13px] font-semibold leading-none text-muted transition-colors hover:text-ink md:py-[2px]";
+}
+
+function sidebarAuthorClass(active: boolean) {
+  return active
+    ? "text-left transition-colors text-ink"
+    : "text-left transition-colors text-muted hover:text-ink";
+}
+
+function mobileAuthorClass(active: boolean) {
+  return active
+    ? "py-1 transition-colors text-ink"
+    : "py-1 transition-colors text-muted hover:text-ink";
 }
 
 function gridClass(view: (typeof viewModes)[number]) {
@@ -510,13 +534,7 @@ function gridClass(view: (typeof viewModes)[number]) {
   return "book-grid grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6";
 }
 
-function bookCardClass(
-  view: (typeof viewModes)[number],
-  dimmed: boolean
-) {
-  if (view === "list") {
-    return "flex w-full items-center gap-4 border-b border-border/60 pb-4 text-left";
-  }
+function bookCardClass(view: (typeof viewModes)[number], dimmed: boolean) {
   return [
     "group relative flex flex-col items-center text-left transition duration-300",
     dimmed ? "opacity-30 blur-[2px]" : "opacity-100 blur-0",
@@ -543,10 +561,7 @@ function metaClass(view: (typeof viewModes)[number]) {
   return "pointer-events-none absolute inset-x-1 bottom-1 rounded-md bg-paper/92 px-2 py-2 text-center opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition duration-300 group-hover:opacity-100 group-focus-visible:opacity-100";
 }
 
-function imageClass(
-  view: (typeof viewModes)[number],
-  dimmed: boolean
-) {
+function imageClass(view: (typeof viewModes)[number], dimmed: boolean) {
   if (view === "list") {
     return "object-cover";
   }

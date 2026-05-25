@@ -41,7 +41,12 @@ export type LegacyBookSeed = {
 };
 
 export function normalizeAuthor(author: Book["author"]): string[] {
-  return Array.isArray(author) ? author : [author];
+  const values = Array.isArray(author) ? author : [author];
+
+  return values
+    .flatMap((value) => value.split(","))
+    .map((value) => value.trim())
+    .filter(Boolean);
 }
 
 export function authorKey(author: Book["author"]): string {
