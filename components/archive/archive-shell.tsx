@@ -79,7 +79,9 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
         params.format === "All" ? true : book.format === params.format,
       )
       .filter((book) =>
-        params.author ? normalizeAuthor(book.author).includes(params.author) : true,
+        params.author
+          ? normalizeAuthor(book.author).includes(params.author)
+          : true,
       )
       .slice();
 
@@ -111,7 +113,11 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
   );
 
   useEffect(() => {
-    if (params.view !== "gallery" || hoveredBookId || filteredBooks.length === 0) {
+    if (
+      params.view !== "gallery" ||
+      hoveredBookId ||
+      filteredBooks.length === 0
+    ) {
       return;
     }
 
@@ -279,7 +285,7 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
                       <div className="min-w-0 text-[14px] font-semibold leading-tight text-ink">
                         {book.title}
                       </div>
-                      <div className="break-words text-right text-[11px] font-medium uppercase leading-snug tracking-[0.04em] text-muted-foreground">
+                      <div className="wrap-break-words text-right text-[11px] font-medium uppercase leading-snug tracking-[0.04em] text-muted-foreground">
                         {authorKey(book.author)}
                       </div>
                     </button>
@@ -371,12 +377,15 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
                       ← Prev
                     </button>
                     <span className="tabular-nums text-muted">
-                      {filteredBooks.length === 0 ? "0 / 0" : `${galleryIndex + 1} / ${filteredBooks.length}`}
+                      {filteredBooks.length === 0
+                        ? "0 / 0"
+                        : `${galleryIndex + 1} / ${filteredBooks.length}`}
                     </span>
                     <button
                       type="button"
                       disabled={
-                        filteredBooks.length === 0 || galleryIndex >= filteredBooks.length - 1
+                        filteredBooks.length === 0 ||
+                        galleryIndex >= filteredBooks.length - 1
                       }
                       className="hover:text-ink disabled:opacity-30"
                       aria-label="Next book"
@@ -483,7 +492,7 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
         <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto border border-border bg-card p-5 sm:p-8">
           {selectedBook ? (
             <div className="grid gap-8 md:grid-cols-[280px_minmax(0,1fr)]">
-              <div className="relative aspect-[2/3] overflow-hidden rounded-md bg-muted">
+              <div className="relative aspect-2/3 overflow-hidden rounded-md bg-muted">
                 <Image
                   src={selectedBook.image}
                   alt={selectedBook.title}
