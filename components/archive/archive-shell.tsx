@@ -250,6 +250,40 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
                     </button>
                   ))}
                 </div>
+              ) : params.view === "icons" ? (
+                <div className={gridClass(params.view)}>
+                  {filteredBooks.map((book) => (
+                    <figure
+                      key={book.id}
+                      className={bookCardClass(params.view, false)}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setParams({ book: book.id })}
+                        className="flex w-full flex-col items-center"
+                      >
+                        <div className={imageWrapClass(params.view)}>
+                          <Image
+                            src={book.image}
+                            alt={book.title}
+                            width={400}
+                            height={600}
+                            sizes="(max-width: 1024px) 33vw, 18vw"
+                            className={imageClass(params.view, false)}
+                          />
+                        </div>
+                        <figcaption className={metaClass(params.view)}>
+                          <div className="text-[11px] font-semibold leading-tight text-ink">
+                            {book.title}
+                          </div>
+                          <div className="mt-0.5 text-[10px] font-medium uppercase leading-none tracking-[0.04em] text-muted">
+                            {authorKey(book.author)}
+                          </div>
+                        </figcaption>
+                      </button>
+                    </figure>
+                  ))}
+                </div>
               ) : (
                 <div className={gridClass(params.view)}>
                   {filteredBooks.map((book) => (
@@ -531,10 +565,13 @@ function gridClass(view: (typeof viewModes)[number]) {
   if (view === "gallery") {
     return "grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4";
   }
-  return "book-grid grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6";
+  return "book-grid grid grid-cols-3 gap-x-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6";
 }
 
 function bookCardClass(view: (typeof viewModes)[number], dimmed: boolean) {
+  if (view === "icons") {
+    return "group relative flex flex-col items-center";
+  }
   return [
     "group relative flex flex-col items-center text-left transition duration-300",
     dimmed ? "opacity-30 blur-[2px]" : "opacity-100 blur-0",
@@ -548,7 +585,7 @@ function imageWrapClass(view: (typeof viewModes)[number]) {
   if (view === "gallery") {
     return "relative h-44 w-full overflow-hidden sm:h-48 lg:h-56";
   }
-  return "relative h-28 w-full overflow-hidden sm:h-32 md:h-36 lg:h-40 xl:h-44";
+  return "flex h-28 w-full items-end justify-center sm:h-32 md:h-36 lg:h-40 xl:h-44";
 }
 
 function metaClass(view: (typeof viewModes)[number]) {
@@ -558,12 +595,15 @@ function metaClass(view: (typeof viewModes)[number]) {
   if (view === "gallery") {
     return "pointer-events-none absolute inset-x-2 bottom-2 rounded-md bg-paper/92 px-3 py-2 text-center opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition duration-300 group-hover:opacity-100 group-focus-visible:opacity-100";
   }
-  return "pointer-events-none absolute inset-x-1 bottom-1 rounded-md bg-paper/92 px-2 py-2 text-center opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition duration-300 group-hover:opacity-100 group-focus-visible:opacity-100";
+  return "book-caption";
 }
 
 function imageClass(view: (typeof viewModes)[number], dimmed: boolean) {
   if (view === "list") {
     return "object-cover";
+  }
+  if (view === "icons") {
+    return "h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_6px_14px_rgba(0,0,0,0.05)] transition-transform duration-500 ease-out group-hover:scale-[1.03]";
   }
   return [
     "object-contain object-bottom drop-shadow-[0_6px_14px_rgba(0,0,0,0.05)] transition-transform duration-500 ease-out group-hover:scale-[1.03]",
