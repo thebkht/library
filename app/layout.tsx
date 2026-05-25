@@ -1,29 +1,35 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope as FontSans } from "next/font/google";
+import type { ReactNode } from "react";
+import { EB_Garamond, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
-import { ThemeProvider } from "next-themes";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
-const fontSans = FontSans({
+const fontSerif = EB_Garamond({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-body",
+});
+
+const fontDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-heading",
 });
 
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    template: `%s | ${siteConfig.name}`,
   },
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
   authors: [
     {
-      name: "bkhtdev",
-      url: "https://bkhtdev.com",
+      name: "bkht",
+      url: siteConfig.credit.href,
     },
   ],
-  creator: "bkhtdev",
+  creator: "bkht",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -45,7 +51,7 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@yusupovbg",
+    creator: "@thebkht",
   },
   icons: {
     icon: "/favicon.ico",
@@ -57,46 +63,31 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f3ec" },
+    { media: "(prefers-color-scheme: dark)", color: "#f7f3ec" },
   ],
 };
 
 interface RootLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <>
-      <html lang="en" suppressHydrationWarning>
-        <head />
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
-          )}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div vaul-drawer-wrapper="">
-              <div className="relative flex min-h-screen flex-col bg-background">
-                {children}
-              </div>
-            </div>
-            {/* <TailwindIndicator />
-            <ThemeSwitcher />
-            <Analytics />
-            <NewYorkToaster />
-            <DefaultToaster />
-            <NewYorkSonner /> */}
-          </ThemeProvider>
-        </body>
-      </html>
-    </>
+    <html lang="en">
+      <body
+        className={cn(
+          "min-h-screen bg-background font-serif text-foreground antialiased",
+          fontSerif.variable,
+          fontDisplay.variable
+        )}
+      >
+        <NuqsAdapter>
+          <div className="relative flex min-h-screen flex-col bg-background">
+            {children}
+          </div>
+        </NuqsAdapter>
+      </body>
+    </html>
   );
 }
