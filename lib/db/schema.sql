@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS books (
   id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
   author JSONB NOT NULL,
-  genre TEXT NOT NULL CHECK (genre IN ('Fiction', 'Nonfiction', 'Poetry')),
+  genre TEXT NOT NULL,
   format TEXT NOT NULL CHECK (format IN ('Hardcover', 'Paperback', 'Trade Paperback', 'Mass Market', 'Other')),
   image TEXT NOT NULL,
   date_added DATE NOT NULL,

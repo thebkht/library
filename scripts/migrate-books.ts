@@ -23,6 +23,8 @@ async function main() {
       await pool.query(statement);
     }
 
+    await pool.query("ALTER TABLE books DROP CONSTRAINT IF EXISTS books_genre_check");
+
     console.log("Applied books schema.");
   } finally {
     await pool.end();
