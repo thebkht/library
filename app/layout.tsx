@@ -74,16 +74,12 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn(fontSerif.variable, fontDisplay.variable)}>
       <body
-        className={cn(
-          "min-h-screen bg-background font-serif text-foreground antialiased",
-          fontSerif.variable,
-          fontDisplay.variable
-        )}
+        className="min-h-screen bg-paper font-sans text-ink antialiased"
       >
         <NuqsAdapter>
-          <div className="relative flex min-h-screen flex-col bg-background">
+          <div className="relative flex min-h-screen flex-col bg-paper">
             {children}
           </div>
         </NuqsAdapter>

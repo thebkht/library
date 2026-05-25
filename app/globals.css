@@ -2,8 +2,12 @@
 @plugin "tailwindcss-animate";
 
 @theme inline {
-  --font-serif: var(--font-body);
+  --font-sans: var(--font-body);
   --font-display: var(--font-heading);
+  --font-serif: var(--font-body);
+
+  --color-paper: hsl(var(--paper));
+  --color-ink: hsl(var(--ink));
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -28,6 +32,8 @@
 
 @layer base {
   :root {
+    --paper: 39 33% 97%;
+    --ink: 24 17% 16%;
     --background: 35 36% 96%;
     --foreground: 24 18% 16%;
 
@@ -70,14 +76,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    background-image:
-      radial-gradient(
-        circle at top left,
-        rgba(169, 120, 82, 0.08),
-        transparent 32%
-      ),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 35%);
+    @apply bg-paper text-ink;
   }
 
   a {

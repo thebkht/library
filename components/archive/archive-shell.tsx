@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { type ReactNode, useMemo } from "react";
+import { type ReactNode, useMemo, useState } from "react";
 import { useQueryStates } from "nuqs";
 import { formatDate } from "@/lib/date";
 import { archiveSearchParams, sortModes, viewModes } from "@/lib/archive/search-params";
@@ -58,6 +58,7 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
   const [params, setParams] = useQueryStates(archiveSearchParams, {
     shallow: false,
   });
+  const [hoveredBookId, setHoveredBookId] = useState<string | null>(null);
 
   const authorCounts = useMemo<AuthorCount[]>(() => {
     const counts = new Map<string, number>();
@@ -98,166 +99,268 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
   const lastUpdated = stats.lastUpdated ? formatDate(stats.lastUpdated) : "Unpublished";
 
   return (
-    <div className="min-h-screen">
-      <header className="sticky top-0 z-30 border-b border-border/80 bg-background/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="font-display text-4xl tracking-tight sm:text-5xl">
+    <>
+      <main className="flex min-h-screen flex-col">
+        <div className="flex-1">
+          <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-4 pb-16 pt-8 sm:px-6 md:flex-row md:gap-12 md:pb-24 md:pt-14">
+            <aside className="md:sticky md:top-14 md:max-h-[calc(100vh-3.5rem)] md:w-48 md:shrink-0 md:overflow-y-auto md:pr-2">
+              <Link
+                href="/"
+                className="block text-[14px] font-semibold leading-none tracking-tight text-ink"
+              >
                 bkht.library
-              </p>
-              <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">
-                {stats.total} volumes collected across fiction, nonfiction, and poetry.
-              </p>
-            </div>
-            <div className="grid grid-cols-3 gap-4 text-sm text-muted-foreground">
-              <Stat label="Fiction" value={stats.genres.Fiction ?? 0} />
-              <Stat label="Nonfiction" value={stats.genres.Nonfiction ?? 0} />
-              <Stat label="Poetry" value={stats.genres.Poetry ?? 0} />
-            </div>
-          </div>
+              </Link>
 
-          <div className="flex flex-wrap items-center gap-2 border-t border-border/70 pt-4">
-            {(["All", ...BOOK_GENRES] as const).map((genre) => (
-              <button
-                key={genre}
-                className={tabClass(params.genre === genre)}
-                onClick={() => setParams({ genre, book: null })}
-                type="button"
-              >
-                {genre}
-              </button>
-            ))}
-          </div>
+              <nav className="mt-7 hidden flex-col gap-[3px] text-[13px] font-semibold leading-none md:flex">
+                {(["All", ...BOOK_GENRES] as const).map((genre) => (
+                  <button
+                    key={genre}
+                    type="button"
+                    className={navButtonClass(params.genre === genre)}
+                    onClick={() => setParams({ genre, book: null })}
+                  >
+                    {genre}
+                  </button>
+                ))}
+              </nav>
 
-          <div className="grid gap-4 border-t border-border/70 pt-4 lg:grid-cols-[1fr_auto_auto]">
-            <ControlGroup label="View by">
-              {viewModes.map((view) => (
-                <button
-                  key={view}
-                  className={chipClass(params.view === view)}
-                  onClick={() => setParams({ view })}
-                  type="button"
-                >
-                  {viewLabel(view)}
-                </button>
-              ))}
-            </ControlGroup>
-            <ControlGroup label="Sort">
-              <select
-                className={selectClass}
-                value={params.sort}
-                onChange={(event) => setParams({ sort: event.target.value as (typeof sortModes)[number] })}
-              >
+              <div className="mt-7 hidden flex-col gap-[3px] text-[13px] font-semibold leading-none md:flex">
+                <div className="mb-0.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
+                  View by
+                </div>
+                {viewModes.map((view) => (
+                  <button
+                    key={view}
+                    type="button"
+                    className={navButtonClass(params.view === view)}
+                    onClick={() => setParams({ view })}
+                  >
+                    {viewLabel(view)}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-7 hidden flex-col gap-[3px] text-[13px] font-semibold leading-none md:flex">
+                <div className="mb-0.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
+                  Sort
+                </div>
                 {sortModes.map((sort) => (
-                  <option key={sort} value={sort}>
+                  <button
+                    key={sort}
+                    type="button"
+                    className={navButtonClass(params.sort === sort)}
+                    onClick={() => setParams({ sort })}
+                  >
                     {sortLabel(sort)}
-                  </option>
+                  </button>
                 ))}
-              </select>
-            </ControlGroup>
-            <ControlGroup label="Format">
-              <select
-                className={selectClass}
-                value={params.format}
-                onChange={(event) => setParams({ format: event.target.value as typeof params.format })}
-              >
-                {["All", ...BOOK_FORMATS].map((format) => (
-                  <option key={format} value={format}>
+              </div>
+
+              <div className="mt-7 hidden flex-col gap-[3px] text-[13px] font-semibold leading-none md:flex">
+                <div className="mb-0.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
+                  Format
+                </div>
+                {(["All", ...BOOK_FORMATS] as const).map((format) => (
+                  <button
+                    key={format}
+                    type="button"
+                    className={navButtonClass(params.format === format)}
+                    onClick={() => setParams({ format })}
+                  >
                     {format}
-                  </option>
+                  </button>
                 ))}
-              </select>
-            </ControlGroup>
+              </div>
+
+              <div className="mt-7 hidden text-[12px] font-semibold leading-snug md:block">
+                <AuthorRail
+                  authors={authorCounts}
+                  selectedAuthor={params.author}
+                  onSelect={(author) => setParams({ author, book: null })}
+                />
+              </div>
+
+              <div className="mt-7 hidden text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground md:block">
+                {stats.total} volumes
+              </div>
+
+              <div className="mt-4 flex flex-col gap-3 md:hidden">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12px] font-semibold">
+                  {(["All", ...BOOK_GENRES] as const).map((genre) => (
+                    <button
+                      key={genre}
+                      type="button"
+                      className={mobileInlineClass(params.genre === genre)}
+                      onClick={() => setParams({ genre, book: null })}
+                    >
+                      {genre}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
+                  <span>View by</span>
+                  {viewModes.map((view) => (
+                    <button
+                      key={view}
+                      type="button"
+                      className={mobileInlineClass(params.view === view)}
+                      onClick={() => setParams({ view })}
+                    >
+                      {viewLabel(view)}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
+                  <span>Sort</span>
+                  {sortModes.map((sort) => (
+                    <button
+                      key={sort}
+                      type="button"
+                      className={mobileInlineClass(params.sort === sort)}
+                      onClick={() => setParams({ sort })}
+                    >
+                      {sortLabel(sort)}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
+                  <span>Format</span>
+                  {(["All", ...BOOK_FORMATS] as const).map((format) => (
+                    <button
+                      key={format}
+                      type="button"
+                      className={mobileInlineClass(params.format === format)}
+                      onClick={() => setParams({ format })}
+                    >
+                      {format}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex flex-col gap-1.5 text-[12px] font-semibold leading-snug">
+                  <Sheet>
+                    <SheetTrigger asChild>
+                      <button
+                        type="button"
+                        className="flex items-center gap-2 py-1.5 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground"
+                      >
+                        <span>Authors</span>
+                        <span className="text-[14px] font-bold leading-none text-ink">+</span>
+                        <span className="text-[10px] text-muted-foreground">({authorCounts.length})</span>
+                      </button>
+                    </SheetTrigger>
+                    <SheetContent side="right" className="bg-paper">
+                      <SheetHeader>
+                        <SheetTitle className="text-left text-[14px] font-semibold tracking-tight text-ink">
+                          Authors
+                        </SheetTitle>
+                        <SheetDescription className="text-left text-[12px] text-muted-foreground">
+                          Filter the archive by author.
+                        </SheetDescription>
+                      </SheetHeader>
+                      <div className="mt-6">
+                        <AuthorRail
+                          authors={authorCounts}
+                          selectedAuthor={params.author}
+                          onSelect={(author) => setParams({ author, book: null })}
+                        />
+                      </div>
+                    </SheetContent>
+                  </Sheet>
+                </div>
+              </div>
+            </aside>
+
+            <section className="min-w-0 flex-1">
+              <div className={gridClass(params.view)}>
+                {filteredBooks.map((book) => (
+                  <button
+                    key={book.id}
+                    type="button"
+                    onClick={() => setParams({ book: book.id })}
+                    onMouseEnter={() => {
+                      if (params.view !== "list") {
+                        setHoveredBookId(book.id);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (params.view !== "list") {
+                        setHoveredBookId(null);
+                      }
+                    }}
+                    onFocus={() => {
+                      if (params.view !== "list") {
+                        setHoveredBookId(book.id);
+                      }
+                    }}
+                    onBlur={() => {
+                      if (params.view !== "list") {
+                        setHoveredBookId(null);
+                      }
+                    }}
+                    className={bookCardClass(
+                      params.view,
+                      hoveredBookId !== null && hoveredBookId !== book.id
+                    )}
+                  >
+                    <div className={imageWrapClass(params.view)}>
+                      <Image
+                        src={book.image}
+                        alt={book.title}
+                        fill
+                        sizes={
+                          params.view === "gallery"
+                            ? "(max-width: 1024px) 50vw, 25vw"
+                            : "(max-width: 1024px) 33vw, 18vw"
+                        }
+                        className={imageClass(
+                          params.view,
+                          hoveredBookId !== null && hoveredBookId !== book.id
+                        )}
+                      />
+                    </div>
+                    <figcaption className={metaClass(params.view)}>
+                      <div className="text-[11px] font-semibold leading-tight text-ink">
+                        {book.title}
+                      </div>
+                      <div className="mt-0.5 text-[10px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground">
+                        {authorKey(book.author)}
+                      </div>
+                    </figcaption>
+                  </button>
+                ))}
+              </div>
+            </section>
           </div>
         </div>
-      </header>
 
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-8 sm:px-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:px-8">
-        <aside className="hidden lg:block">
-          <AuthorRail
-            authors={authorCounts}
-            selectedAuthor={params.author}
-            onSelect={(author) => setParams({ author, book: null })}
-          />
-        </aside>
-
-        <section className="min-w-0">
-          <div className="mb-4 flex items-center justify-between lg:hidden">
-            <p className="text-sm text-muted-foreground">
-              {filteredBooks.length} books shown
-            </p>
-            <Sheet>
-              <SheetTrigger asChild>
-                <button className={chipClass(false)} type="button">
-                  Authors ({authorCounts.length})+
-                </button>
-              </SheetTrigger>
-              <SheetContent side="right" className="bg-card">
-                <SheetHeader>
-                  <SheetTitle className="font-display text-2xl">Authors</SheetTitle>
-                  <SheetDescription>
-                    Filter the archive by author.
-                  </SheetDescription>
-                </SheetHeader>
-                <div className="mt-6">
-                  <AuthorRail
-                    authors={authorCounts}
-                    selectedAuthor={params.author}
-                    onSelect={(author) => setParams({ author, book: null })}
-                  />
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
-
-          <div className={gridClass(params.view)}>
-            {filteredBooks.map((book) => (
-              <button
-                key={book.id}
-                type="button"
-                onClick={() => setParams({ book: book.id })}
-                className={bookCardClass(params.view)}
-              >
-                <div className={imageWrapClass(params.view)}>
-                  <Image
-                    src={book.image}
-                    alt={book.title}
-                    fill
-                    sizes={
-                      params.view === "gallery"
-                        ? "(max-width: 1024px) 50vw, 25vw"
-                        : "(max-width: 1024px) 33vw, 18vw"
-                    }
-                    className="object-cover"
-                  />
-                </div>
-                <div className={metaClass(params.view)}>
-                  <p className="font-display text-xl leading-tight">{book.title}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {authorKey(book.author)}
-                  </p>
-                </div>
-              </button>
-            ))}
-          </div>
-        </section>
-      </div>
-
-      <footer className="border-t border-border/80 px-4 py-8 text-sm text-muted-foreground sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p>A personal archive of books I own and keep returning to.</p>
-          <div className="flex flex-wrap items-center gap-4">
-            <p>Last updated {lastUpdated}</p>
-            <Link href="https://github.com/thebkht" className="hover:text-foreground">
-              Made by bkht
-            </Link>
-            <Link href="/admin" className="hover:text-foreground">
+        <footer className="mx-auto w-full max-w-[1400px] px-4 pb-8 sm:px-6 sm:pb-10">
+          <p className="mb-3 max-w-2xl text-[12px] leading-snug text-muted-foreground sm:mb-4">
+            an archive of physical books I own, not including art books, photo books, or zines
+          </p>
+          <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2 text-[12px] font-medium leading-snug text-muted-foreground">
+            <div className="flex flex-col gap-0.5">
+              <span>Last updated {lastUpdated}</span>
+              <span>
+                Made by{" "}
+                <Link
+                  href="https://github.com/thebkht"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block py-1 hover:text-ink sm:py-0"
+                >
+                  @thebkht
+                </Link>
+              </span>
+            </div>
+            <Link
+              href="/admin"
+              className="inline-block py-1 text-[11px] uppercase leading-none tracking-[0.04em] hover:text-ink sm:py-0"
+            >
               Admin
             </Link>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </main>
 
       <Dialog
         open={Boolean(selectedBook)}
@@ -310,31 +413,7 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
           ) : null}
         </DialogContent>
       </Dialog>
-    </div>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: number }) {
-  return (
-    <div>
-      <p className="font-display text-2xl text-foreground">{value}</p>
-      <p>{label}</p>
-    </div>
-  );
-}
-
-function ControlGroup({
-  label,
-  children,
-}: {
-  label: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="flex flex-wrap items-center gap-3">
-      <span className="text-sm text-muted-foreground">{label}</span>
-      <div className="flex flex-wrap gap-2">{children}</div>
-    </div>
+    </>
   );
 }
 
@@ -351,22 +430,19 @@ function AuthorRail({
   const hiddenAuthors = authors.slice(18);
 
   return (
-    <div className="sticky top-40 space-y-5">
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
-          Authors ({authors.length})+
-        </p>
-        {selectedAuthor ? (
-          <button
-            type="button"
-            className="text-xs uppercase tracking-[0.24em] text-muted-foreground hover:text-foreground"
-            onClick={() => onSelect(null)}
-          >
-            Clear
-          </button>
-        ) : null}
-      </div>
-      <div className="space-y-2 text-sm">
+    <div>
+      <button
+        type="button"
+        className="mb-0.5 flex items-center justify-between gap-3 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted-foreground hover:text-ink"
+        onClick={() => onSelect(null)}
+      >
+        <span className="flex items-baseline gap-2">
+          <span>Authors</span>
+          <span className="text-[10px] tabular-nums">({authors.length})</span>
+        </span>
+        <span className="text-[14px] font-bold leading-none text-ink">+</span>
+      </button>
+      <div className="space-y-[3px] pt-3">
         {visibleAuthors.map((author) => (
           <button
             key={author.name}
@@ -381,10 +457,10 @@ function AuthorRail({
       </div>
       {hiddenAuthors.length > 0 ? (
         <details className="group">
-          <summary className="cursor-pointer text-sm text-muted-foreground">
+          <summary className="mt-3 cursor-pointer text-[11px] uppercase tracking-[0.04em] text-muted-foreground">
             Show {hiddenAuthors.length} more
           </summary>
-          <div className="mt-3 space-y-2 text-sm">
+          <div className="mt-3 space-y-[3px]">
             {hiddenAuthors.map((author) => (
               <button
                 key={author.name}
@@ -403,27 +479,25 @@ function AuthorRail({
   );
 }
 
-const selectClass =
-  "min-w-[180px] rounded-full border border-border bg-card px-4 py-2 text-sm outline-none transition focus:border-foreground";
 const badgeClass =
   "rounded-full border border-border bg-background px-3 py-1 text-xs uppercase tracking-[0.18em] text-muted-foreground";
 
-function tabClass(active: boolean) {
+function navButtonClass(active: boolean) {
   return active
-    ? "rounded-full border border-foreground bg-foreground px-4 py-2 text-sm text-background"
-    : "rounded-full border border-border bg-card px-4 py-2 text-sm text-foreground hover:border-foreground/50";
+    ? "py-1.5 text-left transition-colors md:py-[2px] text-ink"
+    : "py-1.5 text-left transition-colors md:py-[2px] text-muted-foreground hover:text-ink";
 }
 
-function chipClass(active: boolean) {
+function mobileInlineClass(active: boolean) {
   return active
-    ? "rounded-full border border-foreground bg-foreground px-3 py-2 text-sm text-background"
-    : "rounded-full border border-border bg-card px-3 py-2 text-sm text-foreground hover:border-foreground/50";
+    ? "py-1.5 text-left transition-colors md:py-[2px] text-ink"
+    : "py-1.5 text-left transition-colors md:py-[2px] text-muted-foreground hover:text-ink";
 }
 
 function authorRowClass(active: boolean) {
   return active
-    ? "flex w-full items-center justify-between rounded-full bg-foreground px-3 py-2 text-left text-background"
-    : "flex w-full items-center justify-between rounded-full px-3 py-2 text-left text-foreground hover:bg-background";
+    ? "flex w-full items-center justify-between py-1.5 text-left text-[13px] font-semibold leading-none text-ink md:py-[2px]"
+    : "flex w-full items-center justify-between py-1.5 text-left text-[13px] font-semibold leading-none text-muted-foreground transition-colors hover:text-ink md:py-[2px]";
 }
 
 function gridClass(view: (typeof viewModes)[number]) {
@@ -431,16 +505,22 @@ function gridClass(view: (typeof viewModes)[number]) {
     return "space-y-4";
   }
   if (view === "gallery") {
-    return "grid grid-cols-2 gap-6 md:grid-cols-3 xl:grid-cols-4";
+    return "grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4";
   }
-  return "grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5";
+  return "book-grid grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6";
 }
 
-function bookCardClass(view: (typeof viewModes)[number]) {
+function bookCardClass(
+  view: (typeof viewModes)[number],
+  dimmed: boolean
+) {
   if (view === "list") {
     return "flex w-full items-center gap-4 border-b border-border/60 pb-4 text-left";
   }
-  return "text-left";
+  return [
+    "group relative flex flex-col items-center text-left transition duration-300",
+    dimmed ? "opacity-30 blur-[2px]" : "opacity-100 blur-0",
+  ].join(" ");
 }
 
 function imageWrapClass(view: (typeof viewModes)[number]) {
@@ -448,14 +528,30 @@ function imageWrapClass(view: (typeof viewModes)[number]) {
     return "relative aspect-[2/3] w-16 shrink-0 overflow-hidden rounded-md bg-muted";
   }
   if (view === "gallery") {
-    return "relative aspect-[2/3] overflow-hidden rounded-md bg-muted";
+    return "relative h-44 w-full overflow-hidden sm:h-48 lg:h-56";
   }
-  return "relative aspect-[2/3] overflow-hidden rounded-sm bg-muted";
+  return "relative h-28 w-full overflow-hidden sm:h-32 md:h-36 lg:h-40 xl:h-44";
 }
 
 function metaClass(view: (typeof viewModes)[number]) {
   if (view === "list") {
     return "min-w-0";
   }
-  return "pt-3";
+  if (view === "gallery") {
+    return "pointer-events-none absolute inset-x-2 bottom-2 rounded-md bg-paper/92 px-3 py-2 text-center opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition duration-300 group-hover:opacity-100 group-focus-visible:opacity-100";
+  }
+  return "pointer-events-none absolute inset-x-1 bottom-1 rounded-md bg-paper/92 px-2 py-2 text-center opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition duration-300 group-hover:opacity-100 group-focus-visible:opacity-100";
+}
+
+function imageClass(
+  view: (typeof viewModes)[number],
+  dimmed: boolean
+) {
+  if (view === "list") {
+    return "object-cover";
+  }
+  return [
+    "object-contain object-bottom drop-shadow-[0_6px_14px_rgba(0,0,0,0.05)] transition-transform duration-500 ease-out group-hover:scale-[1.03]",
+    dimmed ? "saturate-[0.85]" : "saturate-100",
+  ].join(" ");
 }
