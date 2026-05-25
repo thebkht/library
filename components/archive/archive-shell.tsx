@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { type ReactNode, useMemo, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { useQueryStates } from "nuqs";
 import { formatDate } from "@/lib/date";
 import {
@@ -56,6 +56,7 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
   });
   const [hoveredBookId, setHoveredBookId] = useState<string | null>(null);
   const [authorsOpen, setAuthorsOpen] = useState(true);
+  const galleryViewportRef = useRef<HTMLDivElement | null>(null);
 
   const authorCounts = useMemo<AuthorCount[]>(() => {
     const counts = new Map<string, number>();
@@ -104,6 +105,40 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
     ? formatDate(stats.lastUpdated)
     : "Unpublished";
   const isListView = params.view === "list";
+  const galleryIndex = Math.max(
+    0,
+    filteredBooks.findIndex((book) => book.id === hoveredBookId),
+  );
+
+  useEffect(() => {
+    if (params.view !== "gallery" || hoveredBookId || filteredBooks.length === 0) {
+      return;
+    }
+
+    setHoveredBookId(filteredBooks[0]?.id ?? null);
+  }, [filteredBooks, hoveredBookId, params.view]);
+
+  function scrollGalleryTo(index: number) {
+    const viewport = galleryViewportRef.current;
+    if (!viewport) {
+      return;
+    }
+
+    const nextIndex = Math.max(0, Math.min(index, filteredBooks.length - 1));
+    const child = viewport.children.item(nextIndex) as HTMLElement | null;
+
+    if (!child) {
+      return;
+    }
+
+    child.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+
+    setHoveredBookId(filteredBooks[nextIndex]?.id ?? null);
+  }
 
   return (
     <>
@@ -283,6 +318,73 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
                       </button>
                     </figure>
                   ))}
+                </div>
+              ) : params.view === "gallery" ? (
+                <div className="flex flex-col gap-6">
+                  <div
+                    ref={galleryViewportRef}
+                    className="-mx-4 flex snap-x snap-mandatory overflow-x-auto scroll-smooth px-4 sm:-mx-6 sm:px-6"
+                    style={{ scrollbarWidth: "none" }}
+                  >
+                    {filteredBooks.map((book, index) => (
+                      <button
+                        key={book.id}
+                        type="button"
+                        onClick={() => {
+                          setHoveredBookId(book.id);
+                          setParams({ book: book.id });
+                        }}
+                        onFocus={() => setHoveredBookId(book.id)}
+                        className="flex w-full shrink-0 snap-center flex-col items-center justify-end gap-5 pb-2"
+                        aria-label={`Open ${book.title}`}
+                      >
+                        <div className="flex h-[55vh] max-h-[520px] w-full items-end justify-center px-4">
+                          <Image
+                            src={book.image}
+                            alt={book.title}
+                            width={600}
+                            height={900}
+                            priority={index === 0}
+                            sizes="100vw"
+                            className="h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+                          />
+                        </div>
+                        <div className="px-4 text-center">
+                          <div className="text-[15px] font-semibold leading-tight text-ink">
+                            {book.title}
+                          </div>
+                          <div className="mt-1 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted">
+                            {authorKey(book.author)}
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-center gap-6 text-[11px] font-medium uppercase leading-none tracking-[0.04em] text-muted">
+                    <button
+                      type="button"
+                      disabled={galleryIndex <= 0}
+                      className="hover:text-ink disabled:opacity-30"
+                      aria-label="Previous book"
+                      onClick={() => scrollGalleryTo(galleryIndex - 1)}
+                    >
+                      ← Prev
+                    </button>
+                    <span className="tabular-nums text-muted">
+                      {filteredBooks.length === 0 ? "0 / 0" : `${galleryIndex + 1} / ${filteredBooks.length}`}
+                    </span>
+                    <button
+                      type="button"
+                      disabled={
+                        filteredBooks.length === 0 || galleryIndex >= filteredBooks.length - 1
+                      }
+                      className="hover:text-ink disabled:opacity-30"
+                      aria-label="Next book"
+                      onClick={() => scrollGalleryTo(galleryIndex + 1)}
+                    >
+                      Next →
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div className={gridClass(params.view)}>
@@ -562,9 +664,6 @@ function gridClass(view: (typeof viewModes)[number]) {
   if (view === "list") {
     return "space-y-4";
   }
-  if (view === "gallery") {
-    return "grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4";
-  }
   return "book-grid grid grid-cols-3 gap-x-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6";
 }
 
@@ -582,18 +681,12 @@ function imageWrapClass(view: (typeof viewModes)[number]) {
   if (view === "list") {
     return "relative aspect-[2/3] w-16 shrink-0 overflow-hidden rounded-md bg-muted";
   }
-  if (view === "gallery") {
-    return "relative h-44 w-full overflow-hidden sm:h-48 lg:h-56";
-  }
   return "flex h-28 w-full items-end justify-center sm:h-32 md:h-36 lg:h-40 xl:h-44";
 }
 
 function metaClass(view: (typeof viewModes)[number]) {
   if (view === "list") {
     return "min-w-0";
-  }
-  if (view === "gallery") {
-    return "pointer-events-none absolute inset-x-2 bottom-2 rounded-md bg-paper/92 px-3 py-2 text-center opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition duration-300 group-hover:opacity-100 group-focus-visible:opacity-100";
   }
   return "book-caption";
 }
