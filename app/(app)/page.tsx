@@ -1,89 +1,47 @@
-import Link from "next/link";
-
+import type { Metadata } from "next";
+import { ArchiveShell } from "@/components/archive/archive-shell";
+import { getBook, getStats, listBooks } from "@/lib/db/books";
 import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
-import { buttonVariants } from "@/components/ui/button";
-import { BookCarousel } from "@/components/book-carousel";
-import { BookCarouselMobile } from "@/components/book-carousel-mobile";
-import { getBooks } from "@/lib/fetchers";
 
-export default async function IndexPage() {
-  const data = await getBooks();
-  console.log(data);
-  const books = data.map((book) => book);
-  const first = books.slice(0, 4);
-  const second = books.slice(4, 8);
-  const third = books.slice(9, 13);
+export const dynamic = "force-dynamic";
 
-  return (
-    <div className="container relative mx-auto w-full sm:p-0">
-      <div className="flex items-start flex-none md:flex-row flex-col flex-nowrap h-auto justify-center w-full max-w-[1440px]">
-        <div className="flex flex-col items-start md:flex-[1_0_0px] flex-nowrap gap-12 md:gap-16 h-[calc(100vh-3.5rem)] justify-center p-6 md:w-4 md:pr-24 pt-32 sm:pb-16">
-          <div className="flex flex-col items-start flex-none flex-nowrap gap-12 h-min justify-center p-0 w-full">
-            <div className="flex flex-col items-start flex-none flex-nowrap gap-6 h-min justify-center p-0 w-full">
-              <div className="flex justify-start transform-none outline-none flex-col shrink-0">
-                <h1 className="font-bold lg:text-6xl md:text-5xl text-3xl md:text-left text-center">
-                  a personal library of books, articles, and other resources
-                  that I&apos;ve found useful.
-                </h1>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-none items-center flex-nowrap flex-row gap-2 h-min w-full md:justify-start justify-center">
-            <Link href="/browse" className={cn(buttonVariants())}>
-              Browse
-            </Link>
-            <Link
-              target="_blank"
-              rel="noreferrer"
-              href={siteConfig.links.github}
-              className={cn(buttonVariants({ variant: "outline" }))}
-            >
-              <Icons.gitHub className="mr-2 h-4 w-4" />
-              GitHub
-            </Link>
-          </div>
-        </div>
-        <div className="flex flex-nowrap items-center md:flex-[0.7_0_0px] flex-row gap-3 md:h-[calc(100vh-3.5rem)] justify-center md:sticky top-0 z-10 will-change-transform md:w-4 w-full md:m-0 -mx-8">
-          <BookCarouselMobile books={books} />
-          <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 overflow-hidden w-4 h-full pt-14">
-            <div className="flex-[1_0_0px] w-full h-4 relative">
-              <div className="contents">
-                <BookCarousel books={first} />
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 pt-6 overflow-hidden w-4 h-full">
-            <div className="flex-[1_0_0px] w-full h-4 relative">
-              <div className="contents">
-                <BookCarousel
-                  books={second}
-                  opts={{
-                    align: "end",
-                    dragFree: true,
-                    loop: true,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="xl:flex items-center justify-center flex-col flex-nowrap flex-[1_0_0px] gap-2 pt-14 overflow-hidden w-4 h-full hidden">
-            <div className="flex-[1_0_0px] w-full h-4 relative">
-              <div className="contents">
-                <BookCarousel
-                  books={third}
-                  opts={{
-                    align: "end",
-                    dragFree: true,
-                    loop: true,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ book?: string }>;
+}): Promise<Metadata> {
+  const params = await searchParams;
+  const selectedId = params.book;
+
+  if (!selectedId) {
+    return {
+      title: siteConfig.name,
+      description: siteConfig.description,
+    };
+  }
+
+  const book = await getBook(selectedId);
+
+  if (!book) {
+    return {
+      title: siteConfig.name,
+      description: siteConfig.description,
+    };
+  }
+
+  return {
+    title: `${book.title} | ${siteConfig.name}`,
+    description: book.notes || `${book.title} by ${Array.isArray(book.author) ? book.author.join(", ") : book.author}`,
+    openGraph: {
+      title: `${book.title} | ${siteConfig.name}`,
+      description: book.notes || siteConfig.description,
+      images: [book.image],
+    },
+  };
+}
+
+export default async function HomePage() {
+  const [books, stats] = await Promise.all([listBooks(), getStats()]);
+
+  return <ArchiveShell books={books} stats={stats} />;
 }
