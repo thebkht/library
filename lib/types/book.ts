@@ -12,7 +12,7 @@ export const bookSchema = z.object({
   id: z.string(),
   title: z.string().min(1),
   author: z.union([z.string().min(1), z.array(z.string().min(1)).min(1)]),
-  genre: z.string().trim().min(1),
+  genre: z.array(z.string().trim().min(1)).min(1),
   format: z.enum(BOOK_FORMATS),
   image: z.union([z.string().url(), z.string().startsWith("/")]),
   dateAdded: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -23,7 +23,7 @@ export const bookInputSchema = bookSchema.omit({ id: true });
 
 export type Book = z.infer<typeof bookSchema>;
 export type BookInput = z.infer<typeof bookInputSchema>;
-export type BookGenre = Book["genre"];
+export type BookGenre = Book["genre"][number];
 export type BookFormat = (typeof BOOK_FORMATS)[number];
 
 export type LegacyBookSeed = {
@@ -46,6 +46,19 @@ export function normalizeAuthor(author: Book["author"]): string[] {
     .flatMap((value) => value.split(","))
     .map((value) => value.trim())
     .filter(Boolean);
+}
+
+export function normalizeGenres(genres: string[] | string): string[] {
+  const values = Array.isArray(genres) ? genres : [genres];
+
+  return values
+    .flatMap((value) => value.split(","))
+    .map((value) => value.trim())
+    .filter(Boolean);
+}
+
+export function genreKey(genres: Book["genre"]): string {
+  return normalizeGenres(genres).join(", ");
 }
 
 export function authorKey(author: Book["author"]): string {

@@ -3,6 +3,7 @@ import { randomUUID } from "crypto";
 import {
   bookInputSchema,
   bookSchema,
+  normalizeGenres,
   slugifyBookTitle,
   type Book,
   type BookInput,
@@ -14,7 +15,7 @@ type BookRow = {
   id: string;
   title: string;
   author: string[] | string;
-  genre: BookGenre;
+  genre: string[] | string;
   format: BookFormat;
   image: string;
   date_added: Date | string;
@@ -36,7 +37,7 @@ function fromRow(row: BookRow): Book {
     id: row.id,
     title: row.title,
     author: row.author,
-    genre: row.genre,
+    genre: normalizeGenres(row.genre),
     format: row.format,
     image: row.image,
     dateAdded: toDateString(row.date_added),
@@ -46,6 +47,10 @@ function fromRow(row: BookRow): Book {
 
 function toAuthorJson(author: Book["author"]): string[] | string {
   return Array.isArray(author) ? author : author;
+}
+
+function toGenreJson(genre: Book["genre"]): string[] {
+  return normalizeGenres(genre);
 }
 
 export async function listBooks(): Promise<Book[]> {
@@ -87,7 +92,7 @@ export async function createBook(input: BookInput): Promise<Book> {
       ${id},
       ${parsed.title},
       ${JSON.stringify(toAuthorJson(parsed.author))}::jsonb,
-      ${parsed.genre},
+      ${JSON.stringify(toGenreJson(parsed.genre))}::jsonb,
       ${parsed.format},
       ${parsed.image},
       ${parsed.dateAdded}::date,
@@ -107,7 +112,7 @@ export async function updateBook(id: string, input: BookInput): Promise<Book | n
     SET
       title = ${parsed.title},
       author = ${JSON.stringify(toAuthorJson(parsed.author))}::jsonb,
-      genre = ${parsed.genre},
+      genre = ${JSON.stringify(toGenreJson(parsed.genre))}::jsonb,
       format = ${parsed.format},
       image = ${parsed.image},
       date_added = ${parsed.dateAdded}::date,
@@ -135,7 +140,9 @@ export async function deleteBook(id: string): Promise<Book | null> {
 export async function getStats() {
   const books = await listBooks();
   const genres = books.reduce<Record<string, number>>((acc, book) => {
-    acc[book.genre] = (acc[book.genre] ?? 0) + 1;
+    for (const genre of normalizeGenres(book.genre)) {
+      acc[genre] = (acc[genre] ?? 0) + 1;
+    }
     return acc;
   }, {});
   const formats = books.reduce<Record<string, number>>((acc, book) => {

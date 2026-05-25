@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "db:migrate:books": "tsx scripts/migrate-books.ts",
-    "db:migrate:auth": "better-auth migrate",
+    "db:migrate:auth": "pnpm dlx auth@latest migrate",
     "seed:books": "tsx scripts/seed-books.ts",
     "seed:admin": "tsx scripts/seed-admin.ts"
   },

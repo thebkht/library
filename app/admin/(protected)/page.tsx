@@ -2,7 +2,7 @@ import Link from "next/link";
 import { DeleteBookButton } from "@/components/admin/delete-book-button";
 import { formatDate } from "@/lib/date";
 import { getStats, listBooks } from "@/lib/db/books";
-import { authorKey } from "@/lib/types/book";
+import { authorKey, genreKey } from "@/lib/types/book";
 
 export default async function AdminDashboardPage() {
   const [books, stats] = await Promise.all([listBooks(), getStats()]);
@@ -44,7 +44,7 @@ export default async function AdminDashboardPage() {
               <tr key={book.id} className="border-b border-border/70 last:border-b-0">
                 <td className="px-5 py-4 font-display text-lg">{book.title}</td>
                 <td className="px-5 py-4">{authorKey(book.author)}</td>
-                <td className="px-5 py-4">{book.genre}</td>
+                <td className="px-5 py-4">{genreKey(book.genre)}</td>
                 <td className="px-5 py-4">{book.format}</td>
                 <td className="px-5 py-4">{formatDate(book.dateAdded)}</td>
                 <td className="px-5 py-4">

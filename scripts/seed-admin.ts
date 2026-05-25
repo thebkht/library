@@ -1,4 +1,7 @@
 import { sql } from "@vercel/postgres";
+import { loadLocalEnv } from "./load-env";
+
+loadLocalEnv();
 
 process.env.ALLOW_BOOTSTRAP_SIGNUP = "true";
 

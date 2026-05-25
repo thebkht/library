@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { BOOK_FORMATS, type BookInput } from "@/lib/types/book";
+import { BOOK_FORMATS, normalizeGenres, type BookInput } from "@/lib/types/book";
 
 const formSchema = z.object({
   title: z.string().min(1),
@@ -34,12 +34,13 @@ export async function parseBookFormData(formData: FormData): Promise<{
     .split(",")
     .map((entry) => entry.trim())
     .filter(Boolean);
+  const genres = normalizeGenres(parsed.genre);
 
   return {
     input: {
       title: parsed.title,
       author: authors.length > 1 ? authors : authors[0],
-      genre: parsed.genre,
+      genre: genres,
       format: parsed.format,
       dateAdded: parsed.dateAdded,
       notes: parsed.notes,

@@ -13,6 +13,8 @@ import {
 import {
   BOOK_FORMATS,
   authorKey,
+  genreKey,
+  normalizeGenres,
   normalizeAuthor,
   type Book,
 } from "@/lib/types/book";
@@ -57,7 +59,10 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
   const [authorsOpen, setAuthorsOpen] = useState(true);
   const galleryViewportRef = useRef<HTMLDivElement | null>(null);
   const genreOptions = useMemo(
-    () => Array.from(new Set(books.map((book) => book.genre))).sort((a, b) => a.localeCompare(b)),
+    () =>
+      Array.from(new Set(books.flatMap((book) => normalizeGenres(book.genre)))).sort((a, b) =>
+        a.localeCompare(b),
+      ),
     [books],
   );
 
@@ -76,7 +81,9 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
   const filteredBooks = useMemo(() => {
     const next = books
       .filter((book) =>
-        params.genre === "All" ? true : book.genre === params.genre,
+        params.genre === "All"
+          ? true
+          : normalizeGenres(book.genre).includes(params.genre),
       )
       .filter((book) =>
         params.format === "All" ? true : book.format === params.format,
@@ -514,7 +521,7 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
                   </DialogDescription>
                 </DialogHeader>
                 <div className="mt-6 flex flex-wrap gap-2 text-sm">
-                  <span className={badgeClass}>{selectedBook.genre}</span>
+                  <span className={badgeClass}>{genreKey(selectedBook.genre)}</span>
                   <span className={badgeClass}>{selectedBook.format}</span>
                   <span className={badgeClass}>
                     Added {formatDate(selectedBook.dateAdded)}

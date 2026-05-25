@@ -7,7 +7,7 @@
 1. Install dependencies with `pnpm install`.
 2. Copy `.env.example` to `.env.local` and fill in the required values.
 3. Run `pnpm db:migrate:books` to create the `books` table from [lib/db/schema.sql](/Users/thebkht/Projects/library/lib/db/schema.sql).
-4. Run `pnpm db:migrate:auth` to create Better Auth tables.
+4. Run `pnpm db:migrate:auth` to create Better Auth tables. This uses the Better Auth CLI via `pnpm dlx auth@latest migrate`.
 5. Run `pnpm seed:books`.
 6. Run `pnpm seed:admin`.
 7. Start the app with `pnpm dev`.

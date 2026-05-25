@@ -5,6 +5,9 @@ import { sql } from "@vercel/postgres";
 import sharp from "sharp";
 import { books as legacyBooks } from "../data/book";
 import { slugifyBookTitle, type BookFormat, type BookGenre } from "../lib/types/book";
+import { loadLocalEnv } from "./load-env";
+
+loadLocalEnv();
 
 const genreOverrides: Record<string, BookGenre> = {
   "reopening-muslim-mind": "Nonfiction",
@@ -32,8 +35,8 @@ function mapFormat(type: string): BookFormat {
   }
 }
 
-function inferGenre(slug: string): BookGenre {
-  return genreOverrides[slug] ?? "Fiction";
+function inferGenre(slug: string): BookGenre[] {
+  return [genreOverrides[slug] ?? "Fiction"];
 }
 
 async function uploadCover(coverPath: string, id: string) {
@@ -79,7 +82,7 @@ async function main() {
             ? legacy.author.split(",").map((entry) => entry.trim())
             : legacy.author
         )}::jsonb,
-        ${inferGenre(legacy.slug)},
+        ${JSON.stringify(inferGenre(legacy.slug))}::jsonb,
         ${mapFormat(legacy.type)},
         ${image},
         ${dateAdded}::date,
