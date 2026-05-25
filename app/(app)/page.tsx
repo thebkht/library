@@ -14,10 +14,7 @@ export async function generateMetadata({
   const selectedId = params.book;
 
   if (!selectedId) {
-    return {
-      title: siteConfig.name,
-      description: siteConfig.description,
-    };
+    return {};
   }
 
   const book = await getBook(selectedId);
@@ -31,7 +28,9 @@ export async function generateMetadata({
 
   return {
     title: `${book.title} | ${siteConfig.name}`,
-    description: book.notes || `${book.title} by ${Array.isArray(book.author) ? book.author.join(", ") : book.author}`,
+    description:
+      book.notes ||
+      `${book.title} by ${Array.isArray(book.author) ? book.author.join(", ") : book.author}`,
     openGraph: {
       title: `${book.title} | ${siteConfig.name}`,
       description: book.notes || siteConfig.description,
