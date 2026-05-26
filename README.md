@@ -19,6 +19,7 @@
 - `BLOB_READ_WRITE_TOKEN`
 - `BETTER_AUTH_SECRET`
 - `BETTER_AUTH_URL`
+- `BETTER_AUTH_RATE_LIMIT_STORAGE` optional, set to `database` only after Better Auth rate limit tables exist
 - `ADMIN_EMAIL`
 - `ADMIN_PASSWORD`
 - `ADMIN_NAME`
@@ -30,3 +31,4 @@
 - If original local cover files are unavailable during seeding, the script falls back to `/placeholder-cover.svg`.
 - `/browse` redirects to `/`.
 - Legacy `/book/[slug]` links redirect into `/?book={id}` modal URLs.
+- Better Auth rate limiting defaults to in-memory storage. Opt into `BETTER_AUTH_RATE_LIMIT_STORAGE=database` only after running `pnpm db:migrate:auth` against the target database.

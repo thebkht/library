@@ -2,6 +2,9 @@ import { createPool } from "@vercel/postgres";
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 
+const useDatabaseRateLimit =
+  process.env.BETTER_AUTH_RATE_LIMIT_STORAGE === "database";
+
 const database = process.env.POSTGRES_URL
   ? createPool({
       connectionString: process.env.POSTGRES_URL,
@@ -33,7 +36,7 @@ export const auth = betterAuth({
   },
   rateLimit: {
     enabled: process.env.NODE_ENV === "production",
-    storage: process.env.NODE_ENV === "production" ? "database" : "memory",
+    storage: useDatabaseRateLimit ? "database" : "memory",
     customRules: {
       "/sign-in/email": {
         window: 10,
