@@ -56,13 +56,13 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
     shallow: false,
   });
   const [hoveredBookId, setHoveredBookId] = useState<string | null>(null);
-  const [authorsOpen, setAuthorsOpen] = useState(true);
+  const [authorsOpen, setAuthorsOpen] = useState(false);
   const galleryViewportRef = useRef<HTMLDivElement | null>(null);
   const genreOptions = useMemo(
     () =>
-      Array.from(new Set(books.flatMap((book) => normalizeGenres(book.genre)))).sort((a, b) =>
-        a.localeCompare(b),
-      ),
+      Array.from(
+        new Set(books.flatMap((book) => normalizeGenres(book.genre))),
+      ).sort((a, b) => a.localeCompare(b)),
     [books],
   );
 
@@ -521,7 +521,9 @@ export function ArchiveShell({ books, stats }: ArchiveShellProps) {
                   </DialogDescription>
                 </DialogHeader>
                 <div className="mt-6 flex flex-wrap gap-2 text-sm">
-                  <span className={badgeClass}>{genreKey(selectedBook.genre)}</span>
+                  <span className={badgeClass}>
+                    {genreKey(selectedBook.genre)}
+                  </span>
                   <span className={badgeClass}>{selectedBook.format}</span>
                   <span className={badgeClass}>
                     Added {formatDate(selectedBook.dateAdded)}
